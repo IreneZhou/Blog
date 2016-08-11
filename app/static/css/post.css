@@ -26,7 +26,7 @@ a {
 
 .cover {
 	width: 100%;
-	height: 550px;
+	height: 650px;
 }
 
 .container {
@@ -148,6 +148,7 @@ comment > p {
 
 .jiathis_style {
     display: inline-block;
+	margin-right: 20px;
 }
 
 .leaflet-popup-content p {

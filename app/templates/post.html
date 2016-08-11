@@ -38,6 +38,17 @@
 		</div>
 
 		<div class="response">
+
+			<!-- JiaThis Button BEGIN -->
+			<div class="jiathis_style">
+				<a class="jiathis_button_tsina"></a>
+				<a class="jiathis_button_weixin"></a>
+				<a class="jiathis_button_pocket"></a>
+				<a class="jiathis_button_douban"></a>
+				<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			</div>
+			<!-- JiaThis Button END -->
+
 			<button class="commentButton">
 				<img id="comment-png" src="../static/images/comment.png">
 				<span>评论</span>
@@ -58,15 +69,13 @@
 				<span>收藏</span>
 			</button>
 
-			<!-- JiaThis Button BEGIN -->
-			<div class="jiathis_style">
-				<a class="jiathis_button_tsina"></a>
-				<a class="jiathis_button_weixin"></a>
-				<a class="jiathis_button_pocket"></a>
-				<a class="jiathis_button_douban"></a>
-				<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-			</div>
-			<!-- JiaThis Button END -->
+			{% if current_user == post.author or current_user.is_administrator() %}
+				<a href="{{ url_for('.edit', id=post.id) }}">
+					<img id="comment-png" src="../static/images/edit.png">
+					<span>编辑文章</span>
+				</a>
+			{% endif %}
+
 		</div>
 
 		<form style="display: none" method="post" class="comment-form" role="form" enctype=multipart/form-data>
