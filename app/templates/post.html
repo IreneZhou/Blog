@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<head>
+	{% import "_macros.html" as macros %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/post.css') }}">
+
+	{{ moment.include_jquery() }}
+	{{ moment.include_moment() }}
+</head>
+
+<body>
+	{% include '_nav.html' %}
+	{% if get_flashed_messages() %}
+	{% for message in get_flashed_messages() %}
+		<div class="alert alert-warning">
+			<a class="close" data-dismiss="alert">&times;</a>
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% endif %}
+
+	<img class="cover" src="../{{ post.photo }}">
+	<div class="container">
+
+		<div class="post-title">{{ post.title }}</div>
+		<div class="post-author">
+			<a class="author-name" href="{{ url_for('.user', username=post.author.username) }}">文 / {{ post.author.username }}</a>
+			<div class="post-date">发表 / {{ moment(post.timestamp).format("YYYY-MM-D") }}</div>
+		</div>
+
+		<div class="post-body">
+			{% if post.body_html %}
+				{{ post.body_html | safe }}
+			{% else %}
+				{{ post.body }}
+			{% endif %}
+		</div>
+
+		<div class="response">
+			<button class="commentButton">
+				<img id="comment-png" src="../static/images/comment.png">
+				<span>评论</span>
+			</button>
+
+			<button type="button" class="starButton">
+			{% if current_user.is_authenticated %}
+				{% if not current_user.staring(post)  %}
+					<img class="star" src="../static/images/unstar.png">
+					<img style="display: none" class="star" src="../static/images/star.png">
+				{% else %}
+					<img class="star" src="../static/images/star.png">
+					<img style="display: none" class="star" src="../static/images/unstar.png">
+				{% endif %}
+				{% else %}
+				<a href="/auth/login"><img class="star" src="../static/images/unstar.png"></a>
+			{% endif %}
+				<span>收藏</span>
+			</button>
+
+			<!-- JiaThis Button BEGIN -->
+			<div class="jiathis_style">
+				<a class="jiathis_button_tsina"></a>
+				<a class="jiathis_button_weixin"></a>
+				<a class="jiathis_button_pocket"></a>
+				<a class="jiathis_button_douban"></a>
+				<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			</div>
+			<!-- JiaThis Button END -->
+		</div>
+
+		<form style="display: none" method="post" class="comment-form" role="form" enctype=multipart/form-data>
+			<div>
+				{{ commentForm.hidden_tag() }}
+				{{ commentForm.body(only_input=True, rows=6, class="input-markdown", style="width:100%", placeholder="请输入评论内容……") }}
+			</div>
+
+			{% if current_user.is_authenticated %}
+			<button class="submit">
+				{{ commentForm.submit }}
+			</button>
+			{% else %}
+			<p>评论请先<a href="/auth/login">登录</a></p>
+			{% endif %}
+		</form>
+
+		{% if comments[0] %}
+		<div class="comments"><ul>
+			{% for comment in comments %}
+			<li class="comment">
+				<div class="comment-thumbnail">
+					<a href="{{ url_for('.user', username=comment.author.username) }}">
+						<img src="{{ comment.author.gravatar(size=40) }}">
+						<div>{{ comment.author.username }}</div>
+					</a>
+					<div class="comment-date">{{ moment(comment.timestamp).fromNow() }}</div>
+				</div>
+				<p class="comment-content">
+					{% if moderate or not comment.disabled %}
+						{% if comment.body_html %}
+							{{ comment.body_html | safe }}
+						{% else %}
+							{{ comment.body }}
+						{% endif %}
+					{% endif %}
+				</p>
+			</li>
+			{% endfor %}
+		</ul></div>
+		{% endif %}
+
+	</div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".starButton").click(function() {
+			$('img.star').toggle();
+			$.ajax({
+				url: "{{ url_for('.star',id=post.id) }}"
+			});
+		});
+		$('.commentButton').click(function() {
+			$('.comment-form').toggle();
+		})
+	});
+</script>
+<script>var jiathis_config = {	title: "{{ post.title }}"	}</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/alert.min.js') }}"></script>
+</body>
+</html>

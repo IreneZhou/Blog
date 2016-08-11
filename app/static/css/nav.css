@@ -1,0 +1,44 @@
+a {
+	text-decoration: none;
+}
+
+nav {
+	height: 50px;
+}
+
+nav h2 {
+	display: inline-block;
+	margin-left: 40px;
+	color: black;
+	letter-spacing: 4px;
+	font-size: 20px;
+	font-weight: lighter;
+	line-height: 50px;
+}
+
+nav ul {
+	display: inline-block;
+	float: right;
+	margin-right: 40px;
+}
+
+nav li {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+nav a {
+	color: black;
+	font-size: 14px;
+	font-weight: lighter;
+	line-height: 50px;
+}
+
+input#search {
+	outline: none;
+	font-size: 14px;
+    font-weight: lighter;
+    padding-left: 8px;
+    width: 200px;
+    height: 28px;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/edit_profile.css') }}">
+	{% import "bootstrap/wtf.html" as wtf %}
+	{{ pagedown.include_pagedown() }}
+	{{ moment.include_moment() }}
+</head>
+
+<body>
+	<div id="profile">
+		<nav>
+			<a id="index" href="/">地球观察团</a>
+			<a id="logout" href="/auth/logout">退出账户</a>
+		</nav>
+
+		<div id="description">
+			<input type="file" name="file" id="file">
+			<label for="file"><img for="file" src="{{ current_user.gravatar(size=80) }}"></label>
+			<span id="username">{{ current_user.username }} </span>
+			<form class="form" method="post">
+				{{ form.hidden_tag() }}
+					<div id="name">
+						<span>{{ form.name.label }}</span>
+						<div>{{ form.name }}</div>
+					</div>
+					<div>
+						<span>{{ form.location.label }}</span>
+						<div>{{ form.location }}</div>
+					</div>
+					<div id="about_me">
+						<span>{{ form.about_me.label }}</span>
+						<div>{{ form.about_me }}</div>
+					</div>
+					{{ form.submit(id="submit") }}
+			</form>
+
+		</div>
+
+	</div>
+</body>
+</html>

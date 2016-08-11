@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>地球观察团</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+<div class="form">
+	<ul class="tab-group">
+        <li class="tab active"><a href="#signup">注册</a></li>
+        <li class="tab"><a href="#login">登录</a></li>
+	</ul>
+
+	<div class="tab-content">
+        <div id="signup">
+            <form method="post">
+				{{ form2.hidden_tag() }}
+				<div class="field-wrap">
+					{{ form2.email.label }}
+					{{ form2.email }}
+				</div>
+
+          		<div class="field-wrap">
+            		{{ form2.username.label }}
+					{{ form2.username }}
+          		</div>
+
+				<div class="field-wrap">
+					{{ form2.password.label }}
+					{{ form2.password }}
+          		</div>
+
+				<div class="field-wrap">
+					{{ form2.password2.label }}
+					{{ form2.password2 }}
+          		</div>
+
+          		{{ form2.submit }}
+          </form>
+        </div>
+
+
+        <div id="login">
+			<form method="post">
+				{{ form1.hidden_tag() }}
+            	<div class="field-wrap">
+					{{ form1.email.label }}
+					{{ form1.email }}
+          		</div>
+
+          		<div class="field-wrap">
+					{{ form1.password.label }}
+					{{ form1.password }}
+				</div>
+
+          		<p class="forgot"><a href="#">忘记密码?</a></p>
+					{{ form1.submit }}
+			</form>
+        </div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

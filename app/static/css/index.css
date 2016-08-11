@@ -1,0 +1,121 @@
+html {
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	background: white;
+	height: 100%;
+}
+
+#mapid {
+	height: 100%;
+	width: 45%;
+	float: right;
+}
+
+section {
+	height: 100%;
+}
+
+#container {
+	width: 55%;
+	height: 100%;
+	overflow: auto;
+	float: left;
+	padding: 0 40px;
+	position: relative;
+}
+
+.post {
+	width: 100%;
+	height: 320px;
+	display: inline-block;
+	margin-bottom: 30px;
+	background-color: white;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.cover-photo {
+	width: 100%;
+	height: 75%;
+	position: relative;
+}
+
+.cover-photo > a {
+	display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.post-content {
+	padding: 15px;
+}
+
+.metas {
+	display: block;
+	margin-top: 10px;
+}
+
+.metas img {
+	border-radius: 50%;
+}
+
+.metas > li {
+	display: inline-block;
+	color: #777;
+	margin-right: 10px;
+	font-size: 13px;
+}
+
+.post-author {
+	margin-right: 20px;
+}
+
+img.icon {
+	width: 20px;
+	height: 20px;
+	margin-left: 30px;
+}
+
+.post-title {
+	font-size: 15px;
+	color: #777;
+	display: block;
+}
+
+div.pagination {
+	display: block;
+	text-align: center;
+}
+
+@media screen and (max-width: 720px) {
+	#mapid {
+		display: none;
+	}
+	#container {
+		width: 100%;
+	}
+}
+
+.pop-img {
+    width: 280px;
+    height: 160px;
+}
+
+.text-center {
+	text-align: center;
+}

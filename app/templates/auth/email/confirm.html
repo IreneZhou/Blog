@@ -1,0 +1,14 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+	<p>
+		亲爱的{{ user.username }}:
+
+欢迎来到地球观察团!请点击以下链接或复制粘贴到浏览器确认邮箱。
+
+
+		<a href="{{ url_for('auth.confirm', token=token, _external=True) }}">链接</a>
+
+地球观察团团队
+	</p>
+
+{% endblock %}

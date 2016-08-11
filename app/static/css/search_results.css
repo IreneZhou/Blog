@@ -1,0 +1,21 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+#container {
+	width: 60%;
+	padding: 0 40px;
+}
+
+#search-result {
+	font-size: 16px;
+	font-weight: lighter;
+	margin: 20px 0;
+}
+
+nav {
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}

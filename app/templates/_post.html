@@ -1,0 +1,20 @@
+    <div class="post">
+		<div class="cover-photo">
+			<a class="post-header" href="/post/{{ post.id }}" style="opacity: 1;
+					background:url(../{{ post.photo }}) no-repeat; background-position: center; background-size: cover;"></a>
+		</div>
+        <div class="post-content">
+			<a class="post-title" href="/post/{{ post.id }}">{{ post.title }}</a>
+			<ul class="metas">
+				{% if post.author %}
+				<li><img src="{{ post.author.gravatar(size=20) }}"></li>
+				<li><div class="post-author">{{ post.author.username }}</div></li>
+				{% else %}
+				<li><div class="post-author">匿名</div></li>
+				{% endif %}
+				<li><div class="post-date">发表于  {{ moment(post.timestamp).format("YYYY-MM-D") }}</div></li>
+				<li><img class="icon" src="{{ url_for('static', filename='images/comment.png') }}">  {{ post.comments.count() }}</li>
+{#				<li><img class="icon" src="{{ url_for('static', filename='images/unstar.png') }}">  {{ star[0].count(post.id) }}</li>#}
+			</ul>
+        </div>
+    </div>

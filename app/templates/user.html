@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/user.css') }}">
+	{% import "bootstrap/wtf.html" as wtf %}
+	{{ pagedown.include_pagedown() }}
+{#	{{ moment.include_moment() }}#}
+</head>
+
+<body>
+	<div id="profile" style="opacity: 1; background:url(http://bit.ly/2ak240S) no-repeat;
+	background-position: center; background-size: cover;">
+		<nav>
+			<a id="index" href="/index">地球观察团</a>
+			<a id="logout" href="/auth/logout">退出账户</a>
+		</nav>
+
+		<div id="description">
+			<img class="gravatar" src="{{ user.gravatar(size=80) }}">
+			<span id="name">
+				{{ user.username }}
+				{% if user.name %}
+				( {{ user.name }} )
+				{% endif %}
+			</span>
+			{% if user.location %}
+				<span><img class="location" src="{{ url_for('static', filename='images/location.png') }}">
+				{{ user.location }}</span>
+			{% endif %}
+			{% if user.about_me %}
+				<span id="about_me">{{ user.about_me }}</span>
+			{% endif %}
+		</div>
+
+		{% if user == current_user %}
+			<div class="edit"><a href="{{ url_for('.edit_profile') }}">
+				编辑资料
+			</a></div>
+		{% endif %}
+
+	</div>
+
+	<div class="container">
+		<ul class="tabs">
+			<li class="active" rel="tab1">喜欢</li>
+			<li rel="tab2">我的文章</li>
+		</ul>
+
+		<div class="tab_container">
+			<h3 class="d_active tab_drawer_heading" rel="tab1">喜欢</h3>
+			<div id="tab1" class="tab_content">
+				{{ user.starposts.__len__() }}篇收藏
+			</div>
+	  <!-- #tab1 -->
+			<h3 class="tab_drawer_heading" rel="tab2">文章</h3>
+			<div id="tab2" class="tab_content">
+				{% for post in posts %}
+					<li class="post"><a href="/post/{{ post.id }}">{{ post.title }}</a></li>
+				{% endfor %}
+
+			</div>
+	  <!-- #tab2 -->
+		</div>
+	</div>
+
+	</div>
+
+
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/user.js') }}"></script>
+</body>
+</html>
+
+

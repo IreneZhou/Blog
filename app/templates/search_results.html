@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+	<title>地球观察团</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_post.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search_results.css') }}">
+</head>
+
+<body>
+{% include '_nav.html' %}
+<div id="container">
+<div id="search-result">"{{ query }}" 搜索结果:</div>
+{% for post in results %}
+	{% include '_post.html' %}
+{% endfor %}
+</div>
+</body>
