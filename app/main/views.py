@@ -9,14 +9,6 @@ from .. import db, admin
 from flask_admin.contrib.sqla import ModelView
 from .forms import LoginForm, PostForm, CommentForm, EditProfileForm, SearchForm
 from ..models import User, Post, Permission, Comment, Star, Role
-from ..decorators import admin_required, permission_required
-from flask_admin import Admin, BaseView, expose
-
-# admin.add_view(ModelView(Post, db.session))
-# admin.add_view(ModelView(User, db.session))
-# admin.add_view(ModelView(Comment, db.session))
-# admin.add_view(ModelView(Role, db.session))
-
 
 
 @main.route('/')
@@ -54,6 +46,11 @@ def edit_profile():
 		current_user.name = form.name.data
 		current_user.location = form.location.data
 		current_user.about_me = form.about_me.data
+		file = request.files['file']
+		if file and allowed_file(file.filename):
+			filename = secure_filename(file.filename)
+			file.save(os.path.join(current_app.config['PROFILE_FOLDER'], filename))
+			current_user.photo = os.path.join("static/images/profile/", filename)
 		db.session.add(current_user)
 		db.session.commit()
 		flash('Your profile has been updated.')
@@ -71,6 +68,8 @@ def allowed_file(filename):
 @main.route('/write', methods=['GET', 'POST'])
 @login_required
 def write():
+	if not current_user.can(Permission.WRITE_ARTICLES):
+		flash("抱歉，您暂时未开通写作权限")
 	all_posts = Post.query.all()
 	form = PostForm()
 	if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():

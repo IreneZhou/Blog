@@ -15,7 +15,11 @@
 		</nav>
 
 		<div id="description">
+		{% if current_user.photo %}
+			<img class="photo" src="../{{ current_user.photo }}">
+		{% else %}
 			<img class="gravatar" src="{{ user.gravatar(size=80) }}">
+		{% endif %}
 			<span id="name">
 				{{ user.username }}
 				{% if user.name %}

@@ -59,3 +59,11 @@ img.icon {
 	color: #777;
 	display: block;
 }
+
+img.photo {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+}

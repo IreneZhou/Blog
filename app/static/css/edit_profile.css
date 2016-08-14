@@ -107,3 +107,16 @@ nav {
 	opacity: 0.7;
 }
 
+
+img.photo {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	cursor: pointer;
+}
+
+input#file {
+	visibility: hidden;
+}

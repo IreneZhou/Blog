@@ -14,12 +14,12 @@
 
 <body>
 {% include '_nav.html' %}
-			{% for message in get_flashed_messages() %}
-			<div class="alert alert-warning">
-				<a class="close" data-dismiss="alert">&times;</a>
-				{{ message }}
-			</div>
-			{% endfor %}
+	{% for message in get_flashed_messages() %}
+	<div class="alert alert-warning">
+		<a class="close" data-dismiss="alert">&times;</a>
+		{{ message }}
+	</div>
+	{% endfor %}
 <section>
 <div id="mapid"></div>
 <div id="container">

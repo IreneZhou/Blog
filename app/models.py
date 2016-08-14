@@ -78,6 +78,7 @@ class User(UserMixin, db.Model):
 	avatar_hash = db.Column(db.String(32))
 	confirmed = db.Column(db.Boolean, default=False)
 	comments = db.relationship('Comment', backref='author', lazy='dynamic')
+	photo = db.Column(db.String(128))
 
 	def __init__(self, **kwargs):
 		super(User, self).__init__(**kwargs)
@@ -283,12 +284,6 @@ class Comment(db.Model):
 	disabled = db.Column(db.Boolean)
 	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
-
-	# @staticmethod
-	# def on_changed_body(target, value, oldvalue, initiator):
-	# 	allowed_tags = ['a', 'abbr', 'acronym', 'b', 'code', 'em', 'i', 'strong', 'br', 'img']
-	# 	target.body_html = bleach.linkify(bleach.clean(
-	# 		markdown(value, output_format='html'), tags=allowed_tags, strip=True))
 
 	@staticmethod
 	def on_changed_body(target, value, oldvalue, initiator):

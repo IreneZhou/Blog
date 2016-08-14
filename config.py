@@ -11,6 +11,7 @@ class Config:
 	MAIL_SUBJECT_PREFIX = '[Blog]'
 	COMMENTS_PER_PAGE = 5
 	UPLOAD_FOLDER = 'app/static/images/uploads'
+	PROFILE_FOLDER = 'app/static/images/profile'
 	ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'gif', 'png'])
 	WHOOSH_BASE = path.join(basedir, 'search.db')
 
