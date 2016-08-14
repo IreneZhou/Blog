@@ -6,7 +6,6 @@ Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
 gnureadline==6.3.3
-ipywidgets==5.1.4
 itsdangerous==0.24
 Jinja2==2.8
 jsonschema==2.5.1
