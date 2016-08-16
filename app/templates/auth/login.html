@@ -63,6 +63,21 @@
 
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.tab a').on('click', function (e) {
+			e.preventDefault();
+
+			$(this).parent().addClass('active');
+			$(this).parent().siblings().removeClass('active');
+
+			target = $(this).attr('href');
+
+			$('.tab-content > div').not(target).hide();
+
+			$(target).fadeIn(600);
+		});
+	});
+</script>
 </body>
 </html>
