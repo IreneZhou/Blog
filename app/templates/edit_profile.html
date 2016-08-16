@@ -15,30 +15,48 @@
 		</nav>
 
 		<div id="description">
-
 			<form class="form" method="post" enctype=multipart/form-data>
 
-				<input type="file" name="file" id="file">
-				<label for="file">
-					{% if current_user.photo %}
-					<img class="photo" src="../{{ current_user.photo }}">
-					{% else %}
-					<img for="file" src="{{ current_user.gravatar(size=80) }}">
-					{% endif %}
-				</label>
-			<span id="username">{{ current_user.username }} </span>
+			<div class="imageBox">
+				<div class="thumbBox"></div>
+				<div class="spinner" style="display: none">Loading...</div>
+			</div>
+{#				{% if current_user.photo %}#}
+{#					<img class="photo" src="../{{ current_user.photo }}">#}
+{#					{% else %}#}
+{#					<img for="file" src="{{ current_user.gravatar(size=80) }}">#}
+{#					{% endif %}#}
+			<div class="action">
+				<input type="file" id="file" style="float:left; width: 250px">
+				<label for="file" id="upload">上传头像</label>
+				<input type="button" id="btnCrop" value="Crop" style="float: right">
+				<input type="button" id="btnZoomIn" value="+" style="float: right">
+				<input type="button" id="btnZoomOut" value="-" style="float: right">
+			</div>
+				<div class="cropped"></div>
+				<div>{{ form.photo(id="photo-src") }}</div>
+
+{#				<input type="file" name="file" id="file">#}
+{#				<label for="file">#}
+{#					{% if current_user.photo %}#}
+{#					<img class="photo" src="../{{ current_user.photo }}">#}
+{#					{% else %}#}
+{#					<img for="file" src="{{ current_user.gravatar(size=80) }}">#}
+{#					{% endif %}#}
+{#				</label>#}
+{#			<span id="username">{{ current_user.username }} </span>#}
 				{{ form.hidden_tag() }}
 					<div id="name">
 						<span>{{ form.name.label }}</span>
-						<div>{{ form.name }}</div>
+						<div>{{ form.name(class="write-form") }}</div>
 					</div>
 					<div>
 						<span>{{ form.location.label }}</span>
-						<div>{{ form.location }}</div>
+						<div>{{ form.location(class="write-form") }}</div>
 					</div>
 					<div id="about_me">
 						<span>{{ form.about_me.label }}</span>
-						<div>{{ form.about_me }}</div>
+						<div>{{ form.about_me(class="write-form") }}</div>
 					</div>
 					{{ form.submit(id="submit") }}
 			</form>
@@ -46,5 +64,41 @@
 		</div>
 
 	</div>
+<script type="text/javascript" src="{{ url_for('static', filename='js/cropbox-min.js') }}"></script>
+<script type="text/javascript">
+	window.onload = function() {
+        var options =
+        {
+            imageBox: '.imageBox',
+            thumbBox: '.thumbBox',
+            spinner: '.spinner',
+            imgSrc: 'avatar.png'
+        }
+        var cropper;
+        document.querySelector('#file').addEventListener('change', function(){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                options.imgSrc = e.target.result;
+                cropper = new cropbox(options);
+            }
+            reader.readAsDataURL(this.files[0]);
+            this.files = [];
+        })
+        document.querySelector('#btnCrop').addEventListener('click', function(){
+            var img = cropper.getDataURL();
+
+            document.querySelector('.cropped').innerHTML = '<img src="'+img+'">';
+			document.getElementById("photo-src").innerHTML = img;
+
+        })
+        document.querySelector('#btnZoomIn').addEventListener('click', function(){
+            cropper.zoomIn();
+        })
+        document.querySelector('#btnZoomOut').addEventListener('click', function(){
+            cropper.zoomOut();
+        })
+    };
+
+</script>
 </body>
 </html>

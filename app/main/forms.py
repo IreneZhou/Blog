@@ -30,6 +30,7 @@ class EditProfileForm(Form):
 	location = StringField('所在地', validators=[Length(0, 64)])
 	about_me = TextAreaField("自我介绍")
 	submit = SubmitField("确认")
+	photo = TextAreaField()
 
 
 class CommentForm(Form):
