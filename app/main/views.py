@@ -77,7 +77,7 @@ def allowed_file(filename):
 @login_required
 def write():
 	if not current_user.can(Permission.WRITE_ARTICLES):
-		flash("抱歉，您暂时未开通写作权限")
+		flash("抱歉，您暂时没有发布权限")
 	all_posts = Post.query.all()
 	form = PostForm()
 	if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
