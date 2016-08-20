@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<div id="profile">
+	<div id="wrapper">
 		<nav>
 			<a id="index" href="/">地球观察团</a>
 			<a id="logout" href="/auth/logout">退出账户</a>
@@ -16,49 +16,55 @@
 
 		<div id="description">
 			<form class="form" method="post" enctype=multipart/form-data>
+				{{ form.hidden_tag() }}
 
-			<div class="imageBox">
-				<div class="thumbBox"></div>
-				<div class="spinner" style="display: none">Loading...</div>
-			</div>
-{#				{% if current_user.photo %}#}
-{#					<img class="photo" src="../{{ current_user.photo }}">#}
-{#					{% else %}#}
-{#					<img for="file" src="{{ current_user.gravatar(size=80) }}">#}
-{#					{% endif %}#}
-			<div class="action">
-				<input type="file" id="file" style="float:left; width: 250px">
-				<label for="file" id="upload">上传头像</label>
-				<input type="button" id="btnCrop" value="Crop" style="float: right">
-				<input type="button" id="btnZoomIn" value="+" style="float: right">
-				<input type="button" id="btnZoomOut" value="-" style="float: right">
-			</div>
+				<!-- Trigger/Open The Modal -->
+				<div id="myBtn">
+					{% if current_user.photo %}
+					<img class="photo" src="../{{ current_user.photo }}">
+					{% else %}
+					<img class="photo" src="{{ current_user.gravatar(size=80) }}">
+					{% endif %}
+				</div>
+
+				<!-- The Modal -->
+				<div id="myModal" class="modal">
+				  <!-- Modal content -->
+					<span class="close">x</span>
+
+				    <div class="modal-content">
+					    <div class="imageBox">
+						    <div class="thumbBox"></div>
+						    <div class="spinner" style="display: none">Loading...</div>
+					    </div>
+
+						<div class="action">
+							<input type="file" id="file" style="float:left; width: 250px">
+							<label for="file" id="upload">上传头像</label>
+							<input type="button" id="btnCrop" value="Crop" style="float: right">
+							<input type="button" id="btnZoomIn" value="+" style="float: right">
+							<input type="button" id="btnZoomOut" value="-" style="float: right">
+						</div>
+  					</div>
+				</div>
+
 				<div class="cropped"></div>
 				<div>{{ form.photo(id="photo-src") }}</div>
 
-{#				<input type="file" name="file" id="file">#}
-{#				<label for="file">#}
-{#					{% if current_user.photo %}#}
-{#					<img class="photo" src="../{{ current_user.photo }}">#}
-{#					{% else %}#}
-{#					<img for="file" src="{{ current_user.gravatar(size=80) }}">#}
-{#					{% endif %}#}
-{#				</label>#}
-{#			<span id="username">{{ current_user.username }} </span>#}
-				{{ form.hidden_tag() }}
-					<div id="name">
-						<span>{{ form.name.label }}</span>
-						<div>{{ form.name(class="write-form") }}</div>
-					</div>
-					<div>
-						<span>{{ form.location.label }}</span>
-						<div>{{ form.location(class="write-form") }}</div>
-					</div>
-					<div id="about_me">
-						<span>{{ form.about_me.label }}</span>
-						<div>{{ form.about_me(class="write-form") }}</div>
-					</div>
-					{{ form.submit(id="submit") }}
+
+				<div class="form-line">
+					{{ form.name.label }}
+					{{ form.name(class="write-form") }}
+				</div>
+				<div class="form-line">
+					{{ form.location.label }}
+					{{ form.location(class="write-form") }}
+				</div>
+				<div class="form-line">
+					{{ form.about_me.label }}
+					{{ form.about_me(class="write-form") }}
+				</div>
+				{{ form.submit(id="submit") }}
 			</form>
 
 		</div>
@@ -67,38 +73,70 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/cropbox-min.js') }}"></script>
 <script type="text/javascript">
 	window.onload = function() {
-        var options =
+        var modal = document.getElementById('myModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+			modal.style.display = "inherit";
+
+		};
+
+		var options =
         {
             imageBox: '.imageBox',
             thumbBox: '.thumbBox',
             spinner: '.spinner',
             imgSrc: 'avatar.png'
-        }
+        };
         var cropper;
         document.querySelector('#file').addEventListener('change', function(){
             var reader = new FileReader();
             reader.onload = function(e) {
                 options.imgSrc = e.target.result;
                 cropper = new cropbox(options);
-            }
+            };
             reader.readAsDataURL(this.files[0]);
             this.files = [];
-        })
+        });
         document.querySelector('#btnCrop').addEventListener('click', function(){
             var img = cropper.getDataURL();
 
             document.querySelector('.cropped').innerHTML = '<img src="'+img+'">';
 			document.getElementById("photo-src").innerHTML = img;
 
-        })
+        });
         document.querySelector('#btnZoomIn').addEventListener('click', function(){
             cropper.zoomIn();
-        })
+        });
         document.querySelector('#btnZoomOut').addEventListener('click', function(){
             cropper.zoomOut();
-        })
-    };
+        });
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		};
+
+		var btnCrop = document.getElementById("btnCrop");
+		btnCrop.onclick = function(){
+			modal.style.display="none";
+		};
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		};
+	};
 
 </script>
+
 </body>
 </html>

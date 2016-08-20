@@ -61,7 +61,6 @@ def edit_profile():
 			# current_user.photo = os.path.join("static/images/profile/", filename)
 		db.session.add(current_user)
 		db.session.commit()
-		flash('Your profile has been updated.')
 		return redirect(url_for('.user', username=current_user.username))
 	form.name.data = current_user.name
 	form.location.data = current_user.location

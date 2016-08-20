@@ -17,24 +17,26 @@ a {
 	text-decoration: none;
 }
 
-#profile {
+#wrapper {
 	width: 100%;
-	height: 100vh;
+	height: 100%;
+}
+
+nav {
+	display: block;
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
 }
 
 #description {
 	display: block;
-	width: 400px;
-	height: 400px;
-	margin: 0 auto;
-	padding-top: 100px;
+	width: 450px;
+	height: 500px;
+	margin: 100px auto;
+	position: relative;
 }
 
-#description img {
-	border-radius: 50%;
-	display: block;
-	margin: auto;
-}
 
 #username {
 	color: white;
@@ -46,9 +48,7 @@ a {
 	text-align: center;
 }
 
-nav {
-	display: block;
-}
+
 
 #logout {
 	color: white;
@@ -63,29 +63,18 @@ nav {
 	font-size: 20px;
 }
 
-.form {
-	margin: 50px auto;
-	width: 500px;
-	height: 300px;
-}
 
-.form > div {
-	display: block;
-	margin-bottom: 40px;
-}
-
-.form span {
-	color: white;
-}
-
-.form > div >div {
-	display: inline-block;
-	float: right;
+.form-line {
+	height: 30px;
+	margin-bottom: 20px;
 }
 
 .write-form {
-	width: 400px;
+	float: right;
 	height: 30px;
+	line-height: 30px;
+	width: 300px;
+	padding-left: 5px;
 }
 
 
@@ -104,28 +93,21 @@ nav {
 }
 
 
+#myBtn {
+	margin-bottom: 50px;
+}
+
 img.photo {
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
 	display: block;
 	margin: auto;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
 	cursor: pointer;
-}
-.action {
-	width: 200px;
-	margin: auto;
 }
 
 input#file, textarea#photo-src{
-	visibility: hidden;
-}
-
-label#upload {
-	display: inline-block;
-	background: white;
-	width: 100px;
-	height: 20px;
+	display: none;
 }
 
 
@@ -158,6 +140,30 @@ label#upload {
 .thumbBox {
 	border-radius: 50%;
 }
+
+
+
+/* The Modal (background) */
+#myModal {
+	border-radius: 5%;
+    display: none; /* Hidden by default */
+	position: absolute;
+	top: 0;
+	left: 200px;
+	width: 300px;
+	height: 360px;
+	background: #FFF;
+}
+
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
 .imageBox .spinner
 {
     position: absolute;
@@ -170,3 +176,37 @@ label#upload {
     background: rgba(0,0,0,0.7);
 }
 
+.imageBox {
+	margin-bottom: 20px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+	margin-right: 8px;
+    font-size: 22px;
+    /*font-weight: bold;*/
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+label#upload:hover {
+    background: #DDD;
+}
+
+label#upload {
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    width: 80px;
+    height: 20px;
+    border-radius: 8px;
+    border: 1px solid #DDDDDD;
+    cursor: pointer;
+}
