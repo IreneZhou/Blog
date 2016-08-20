@@ -20,14 +20,14 @@ $ virtualenv -p /usr/bin/python3.5 venv
 
 ```
 $ source venv/bin/activate
-
 ```
 
 
 
-安装包及运行工程：
+运行：
 
 ````
+$ git clone https://github.com/IreneZhou/Blog.git
 $ pip install -r requirements.txt
 $ python3 manage.py runserver
 ````
