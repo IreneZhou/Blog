@@ -102,7 +102,7 @@
 				<div class="comment-thumbnail">
 					<a href="{{ url_for('.user', username=comment.author.username) }}">
 						{% if comment.author.photo %}
-							<img class="gravatar" src="../{{ current_user.photo }}">
+							<img class="gravatar" src="../{{ comment.author.photo }}">
 						{% else %}
 							<img class="gravatar" src="{{comment.author.gravatar(size=30) }}">
 						{% endif %}

@@ -40,18 +40,21 @@ a {
 .metas > li {
 	display: inline-block;
 	color: #777;
-	margin-right: 10px;
+	margin-right: 20px;
 	font-size: 13px;
 }
 
-.post-author {
-	margin-right: 20px;
+.metas span {
+	vertical-align: middle;
+}
+
+span#post-author {
+	color: #777;
 }
 
 img.icon {
 	width: 20px;
 	height: 20px;
-	margin-left: 30px;
 }
 
 .post-title {
