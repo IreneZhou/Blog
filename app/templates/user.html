@@ -4,7 +4,8 @@
 	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/user.css') }}">
 	{% import "bootstrap/wtf.html" as wtf %}
 	{{ pagedown.include_pagedown() }}
-{#	{{ moment.include_moment() }}#}
+	{{ moment.include_jquery() }}
+	{{ moment.include_moment() }}
 </head>
 
 <body>
@@ -18,8 +19,8 @@
 		</nav>
 
 		<div id="description">
-		{% if current_user.photo %}
-			<img class="photo" src="{{ current_user.photo }}">
+		{% if user.photo %}
+			<img class="photo" src="{{ user.photo }}">
 		{% else %}
 			<img class="photo" src="{{ user.gravatar(size=80) }}">
 		{% endif %}
@@ -48,8 +49,8 @@
 
 	<div class="container">
 		<ul class="tabs">
-			<li class="active" rel="tab1">喜欢</li>
-			<li rel="tab2">我的文章</li>
+			<li class="active" rel="tab1">收藏</li>
+			<li rel="tab2">发布</li>
 		</ul>
 
 		<div class="tab_container">
