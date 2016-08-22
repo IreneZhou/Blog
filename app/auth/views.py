@@ -12,12 +12,15 @@ def login():
 	form1 = LoginForm()
 	if form1.validate_on_submit():
 		user = User.query.filter_by(email=form1.email.data).first()
+		if not user:
+			flash("该邮箱不存在")
 		if user and user.verify_password(form1.password.data):
 			flash("登录成功", 'success')
 			login_user(user)
 			#return redirect(request.args.get('next') or url_for('main.index'))
 			return redirect(url_for('main.user', username=user.username))
-		flash('用户名或密码错误')
+		else:
+			flash('用户名或密码错误')
 
 	form2 = RegistrationForm()
 	if form2.validate_on_submit():

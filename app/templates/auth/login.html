@@ -1,18 +1,44 @@
+<!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>地球观察团</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 
 <body>
-
+	{% for message in get_flashed_messages() %}
+	<div class="alert alert-warning">
+		<a class="close" data-dismiss="alert">&times;</a>
+		{{ message }}
+	</div>
+	{% endfor %}
 <div class="form">
 	<ul class="tab-group">
-        <li class="tab active"><a href="#signup">注册</a></li>
-        <li class="tab"><a href="#login">登录</a></li>
+		<li class="tab active"><a href="#login">登录</a></li>
+        <li class="tab"><a href="#signup">注册</a></li>
+
 	</ul>
 
 	<div class="tab-content">
+		<div id="login">
+			<form method="post">
+				{{ form1.hidden_tag() }}
+            	<div class="field-wrap">
+					{{ form1.email.label }}
+					{{ form1.email }}
+          		</div>
+
+          		<div class="field-wrap">
+					{{ form1.password.label }}
+					{{ form1.password }}
+				</div>
+
+          		<p class="forgot"><a href="#">忘记密码?</a></p>
+					{{ form1.submit }}
+			</form>
+        </div>
         <div id="signup">
             <form method="post">
 				{{ form2.hidden_tag() }}
@@ -39,25 +65,6 @@
           		{{ form2.submit }}
           </form>
         </div>
-
-
-        <div id="login">
-			<form method="post">
-				{{ form1.hidden_tag() }}
-            	<div class="field-wrap">
-					{{ form1.email.label }}
-					{{ form1.email }}
-          		</div>
-
-          		<div class="field-wrap">
-					{{ form1.password.label }}
-					{{ form1.password }}
-				</div>
-
-          		<p class="forgot"><a href="#">忘记密码?</a></p>
-					{{ form1.submit }}
-			</form>
-        </div>
 	</div>
 </div>
 
@@ -79,5 +86,6 @@
 		});
 	});
 </script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/alert.min.js') }}"></script>
 </body>
 </html>
