@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<section id="preview">
+	<div id="preview">
 	{% include '_nav.html' %}
 	{% if get_flashed_messages() %}
 	{% for message in get_flashed_messages() %}
@@ -21,12 +21,13 @@
 	{% endfor %}
 	{% endif %}
 	<img class="cover" src="../{{ post.photo }}">
-	</section>
+	</div>
+
 	<div class="container">
 
 		<div class="post-title">{{ post.title }}</div>
 		<div class="post-author">
-			<a class="author-name" href="{{ url_for('.user', username=post.author.username) }}">文 / {{ post.author.username }}</a>
+			文 / <a class="author-name" href="{{ url_for('.user', username=post.author.username) }}">{{ post.author.username }}</a>
 			<div class="post-date">发表 / {{ moment(post.timestamp).format("YYYY-MM-D") }}</div>
 		</div>
 
@@ -100,7 +101,11 @@
 			<li class="comment">
 				<div class="comment-thumbnail">
 					<a href="{{ url_for('.user', username=comment.author.username) }}">
-						<img src="{{ comment.author.gravatar(size=40) }}">
+						{% if comment.author.photo %}
+							<img class="gravatar" src="../{{ current_user.photo }}">
+						{% else %}
+							<img class="gravatar" src="{{comment.author.gravatar(size=30) }}">
+						{% endif %}
 						<div>{{ comment.author.username }}</div>
 					</a>
 					<div class="comment-date">{{ moment(comment.timestamp).fromNow() }}</div>
