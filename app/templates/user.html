@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/_post.css') }}"/>
 	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/user.css') }}">
 	{% import "bootstrap/wtf.html" as wtf %}
 	{{ pagedown.include_pagedown() }}
@@ -18,7 +19,7 @@
 		{% if current_user.photo %}
 			<img class="photo" src="{{ current_user.photo }}">
 		{% else %}
-			<img class="gravatar" src="{{ user.gravatar(size=80) }}">
+			<img class="photo" src="{{ user.gravatar(size=80) }}">
 		{% endif %}
 			<span id="name">
 				{{ user.username }}
@@ -52,15 +53,21 @@
 		<div class="tab_container">
 			<h3 class="d_active tab_drawer_heading" rel="tab1">喜欢</h3>
 			<div id="tab1" class="tab_content">
-				{{ user.starposts.__len__() }}篇收藏
+{#				{{ user.starposts.__len__() }}篇收藏#}
+			<ul class="posts">
+				{% for post in user.starposts %}
+				{% include '_post.html' %}
+				{% endfor %}
+			</ul>
 			</div>
 	  <!-- #tab1 -->
 			<h3 class="tab_drawer_heading" rel="tab2">文章</h3>
 			<div id="tab2" class="tab_content">
+			<ul class="posts">
 				{% for post in posts %}
-					<li class="post"><a href="/post/{{ post.id }}">{{ post.title }}</a></li>
+					{% include '_post.html' %}
 				{% endfor %}
-
+			</ul>
 			</div>
 	  <!-- #tab2 -->
 		</div>

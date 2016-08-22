@@ -10,6 +10,7 @@
 </head>
 
 <body>
+	<section id="preview">
 	{% include '_nav.html' %}
 	{% if get_flashed_messages() %}
 	{% for message in get_flashed_messages() %}
@@ -19,8 +20,8 @@
 		</div>
 	{% endfor %}
 	{% endif %}
-
 	<img class="cover" src="../{{ post.photo }}">
+	</section>
 	<div class="container">
 
 		<div class="post-title">{{ post.title }}</div>
