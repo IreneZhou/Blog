@@ -3,6 +3,10 @@
 	margin: 0;
 }
 
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 #container {
 	width: 60%;
 	padding: 0 40px;
