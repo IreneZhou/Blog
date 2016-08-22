@@ -9,6 +9,7 @@
 
 body {
 	height: 100%;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	background:url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?dpr=2&auto=format&crop=entropy&fit=crop&w=1253&h=834&q=80)
 	no-repeat; background-position: center; background-size: cover;"
 }
@@ -25,19 +26,25 @@ nav {
 
 nav a {
 	color: white;
-	line-height: 50px;
 	font-size: 16px;
 	font-weight: lighter;
 	text-decoration: none;
+	line-height: 50px;
+}
+
+nav h2 {
+	display: inline-block;
+	margin-left: 40px;
+	color: white;
+	letter-spacing: 4px;
+	font-size: 20px;
+	font-weight: lighter;
+	line-height: 50px;
 }
 
 #logout {
 	float: right;
 	margin-right: 40px;
-}
-
-#index {
-	margin-left: 40px;
 }
 
 

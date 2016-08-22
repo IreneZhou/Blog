@@ -54,9 +54,14 @@ div.pagination {
 .pop-img {
     width: 280px;
     height: 160px;
+	margin-top: 5px;
 }
 
-.text-center {
+
+a.popup-title {
+	display: block;
 	text-align: center;
+	color: black;
+	font-size: 13px;
 }
 

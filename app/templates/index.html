@@ -56,7 +56,7 @@ $(document).ready(function() {
 		var long = {{ post.long }};
 		L.marker([lat, long])
 				.addTo(mymap)
-				.bindPopup('<a href="/post/{{ post.id }}">{{ post.title }}<img class="pop-img" src="../{{ post.photo }}"></a>')
+				.bindPopup('<a class="popup-title" href="/post/{{ post.id }}">{{ post.title }}<img class="pop-img" src="../{{ post.photo }}"></a>')
 				.openPopup();
 	{% endfor %}
 

@@ -7,6 +7,10 @@
 	box-sizing: border-box;
 }
 
+body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 img {
 	vertical-align: middle;
 }
@@ -50,17 +54,24 @@ nav {
 nav a {
 	color: white;
 	font-size: 16px;
+	font-weight: lighter;
 	text-decoration: none;
+	line-height: 50px;
+}
+
+nav h2 {
+	display: inline-block;
+	margin-left: 40px;
+	color: white;
+	letter-spacing: 4px;
+	font-size: 20px;
+	font-weight: lighter;
 	line-height: 50px;
 }
 
 #logout {
 	float: right;
 	margin-right: 40px;
-}
-
-#index {
-	margin-left: 40px;
 }
 
 img.location {
@@ -179,3 +190,4 @@ img.photo {
 ul.posts {
 	width: 750px;
 }
+
