@@ -49,16 +49,14 @@ def edit_profile():
 		current_user.location = form.location.data
 		current_user.about_me = form.about_me.data
 		# file = request.files['file']
-		if form.photo:
+		if form.photo.data:
+		# if file:
 			val = form.photo.data[22:]
 			filestring = base64.b64decode(val)
 			filename = os.path.join(current_app.config['PROFILE_FOLDER']) + '/' + str(current_user.id) + '.png'
 			file = open(filename, "wb")
 			file.write(filestring)
 			current_user.photo = '..' + filename[3:]
-			# filename = secure_filename(file.filename)
-			# file.save(os.path.join(current_app.config['PROFILE_FOLDER'], filename))
-			# current_user.photo = os.path.join("static/images/profile/", filename)
 		db.session.add(current_user)
 		db.session.commit()
 		return redirect(url_for('.user', username=current_user.username))

@@ -15,9 +15,9 @@ img {
 	vertical-align: middle;
 }
 
-span {
-	height: 40px;
-}
+/*span {*/
+	/*height: 40px;*/
+/*}*/
 
 #profile {
 	width: 100%;
@@ -38,6 +38,7 @@ span {
 /*}*/
 
 #description span {
+	font-weight: 200;
 	color: white;
 	display: block;
 	margin-left: auto;
@@ -45,6 +46,10 @@ span {
 	font-size: 15px;
 	padding-top: 20px;
 	text-align: center;
+}
+
+span#about_me {
+	height: auto;
 }
 
 nav {
