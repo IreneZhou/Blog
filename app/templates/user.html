@@ -40,9 +40,9 @@
 		</div>
 
 		{% if user == current_user %}
-			<div class="edit"><a href="{{ url_for('.edit_profile') }}">
+			<a class="edit" href="{{ url_for('.edit_profile') }}">
 				编辑资料
-			</a></div>
+			</a>
 		{% endif %}
 
 	</div>

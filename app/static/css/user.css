@@ -86,18 +86,22 @@ img.location {
 }
 
 
-.edit {
-	margin: 20px auto;
-	height: 40px;
-	width: 125px;
-	border: 1px solid #47b2e2;
-	border-radius: 30px;
+a.edit {
+    display: block;
+    margin: 20px auto;
+    height: 40px;
+    width: 125px;
+    border: 1px solid #47b2e2;
+    border-radius: 30px;
+    color: #47b2e2;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
 }
-.edit a {
-	color: #47b2e2;
-	line-height: 40px;
-	margin-left: 35px;
-	font-size: 14px;
+
+a.edit:hover {
+	background-color: #47b2e2;
+	color: white;
 }
 
 
@@ -109,6 +113,8 @@ img.location {
 }
 
 ul.tabs {
+	font-weight: 200;
+	letter-spacing: 5px;
 	margin: 0;
 	padding: 0;
 	float: left;
@@ -192,7 +198,10 @@ img.photo {
 	margin: auto;
 }
 
-ul.posts {
-	width: 750px;
+div.post {
+	width: 570px;
+}
+div.post:nth-child(odd) {
+    margin-right: 40px;
 }
 
