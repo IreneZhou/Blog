@@ -284,6 +284,8 @@ class Comment(db.Model):
 	disabled = db.Column(db.Boolean)
 	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+	parent = db.Column(db.Integer, db.ForeignKey('comments.id'))
+	children = db.relationship("Comment")
 
 	@staticmethod
 	def on_changed_body(target, value, oldvalue, initiator):

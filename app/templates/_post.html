@@ -17,7 +17,7 @@
 					</a>
 				</li>
 
-				<li><span>发表于</span><span>  {{ moment(post.timestamp).format("YYYY-MM-D") }}</span></li>
+				<li><span>发表于</span> {{ moment(post.timestamp).format("YYYY-MM-D") }}</li>
 
 				<li>
 					<img class="icon" src="{{ url_for('static', filename='images/comment.png') }}">

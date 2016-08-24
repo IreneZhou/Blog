@@ -63,5 +63,11 @@ a.popup-title {
 	text-align: center;
 	color: black;
 	font-size: 13px;
+	text-decoration: none;
+	font-weight: 200;
+}
+
+a.popup-title:hover {
+	opacity: 0.5;
 }
 

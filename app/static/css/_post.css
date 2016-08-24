@@ -10,7 +10,7 @@ a {
 	background-color: white;
 	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
 .cover-photo {
@@ -30,6 +30,7 @@ a {
 
 .post-content {
 	padding: 15px;
+	font-weight: 200;
 }
 
 .metas {
@@ -57,10 +58,15 @@ img.icon {
 	height: 20px;
 }
 
-.post-title {
+a.post-title {
 	font-size: 15px;
 	color: #777;
 	display: block;
+	text-decoration: none;
+}
+
+a.post-title:hover {
+    OPACITY: 0.5;
 }
 
 img.gravatar {

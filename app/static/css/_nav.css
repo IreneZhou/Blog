@@ -42,3 +42,9 @@ input#search {
     width: 200px;
     height: 28px;
 }
+
+li>a:hover {
+    color: #777;
+    text-decoration: none;
+    opacity: 0.5;
+}
