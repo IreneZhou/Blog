@@ -8,7 +8,7 @@ from . import main
 from .. import db, admin
 from flask_admin.contrib.sqla import ModelView
 from .forms import LoginForm, PostForm, CommentForm, EditProfileForm, SearchForm
-from ..models import User, Post, Permission, Comment, Star, Role
+from ..models import User, Post, Permission, Comment, Star, Role, Category, Domain
 import base64
 
 
@@ -17,20 +17,55 @@ import base64
 @main.route('/index')
 def index():
 	form = SearchForm()
-	# category_list = Category.query.all()
-	# star = Star.query.with_entities(Star.post_id).all()
+	category_list = Category.query.all()
+	domain_list = Domain.query.all()
 	page = request.args.get('page', 1, type=int)
 	pagination = Post.query.order_by(Post.timestamp.desc()).paginate(
 		page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 	posts = pagination.items
 	all_posts = Post.query.all()
-	return render_template('index.html', posts=posts, pagination=pagination, user=user, star=star, form=form, all_posts=all_posts)
+	return render_template('index.html', category_list=category_list,
+						   domain_list=domain_list,
+						   posts=posts, pagination=pagination, user=user, form=form,
+						   all_posts=all_posts)
 
 
-@main.route('/login', methods=['GET', 'POST'])
-def login():
-	form = LoginForm()
-	return render_template('login.html', form=form, title="加入")
+@main.route('/category/<int:id>')
+def category(id):
+	category = Category.query.get_or_404(id)
+	category_list = Category.query.all()
+	domain_list = Domain.query.all()
+	form = SearchForm()
+	all_posts = Post.query.all()
+	page = request.args.get('page', 1, type=int)
+	pagination = category.posts.order_by(Post.timestamp.desc()).paginate(
+		page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
+	posts = pagination.items
+	return render_template('index.html', category=category, category_list=category_list,
+						   domain_list=domain_list,
+						   posts=posts,  pagination=pagination, user=user,
+						   form=form, all_posts=all_posts)
+
+@main.route('/domain/<int:id>')
+def domain(id):
+	domain = Domain.query.get_or_404(id)
+	category_list = Category.query.all()
+	domain_list = Domain.query.all()
+	form = SearchForm()
+	all_posts = Post.query.all()
+	page = request.args.get('page', 1, type=int)
+	pagination = domain.posts.order_by(Post.timestamp.desc()).paginate(
+		page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
+	posts = pagination.items
+	return render_template('index.html', domain=domain, category_list=category_list,
+						   domain_list=domain_list,
+						   posts=posts,  pagination=pagination, user=user,
+						   form=form, all_posts=all_posts)
+
+# @main.route('/login', methods=['GET', 'POST'])
+# def login():
+# 	form = LoginForm()
+# 	return render_template('login.html', form=form, title="加入")
 
 
 @main.route('/user/<username>', methods=['GET', 'POST'])
@@ -77,6 +112,7 @@ def write():
 		flash("抱歉，您暂时没有发布权限")
 	all_posts = Post.query.all()
 	form = PostForm()
+	category = Category()
 	if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
 		if 'file' not in request.files:
 			flash('No file part')
@@ -89,7 +125,8 @@ def write():
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
 		post = Post(body=form.body.data, title=form.title.data, lat=form.lat.data, long=form.long.data,
-					author=current_user._get_current_object(),
+					author=current_user._get_current_object(), domain=Domain.query.get(form.domain.data),
+					category=Category.query.get(form.category.data),
 					photo=os.path.join("static/images/uploads/", filename))
 		db.session.add(post)
 		try:

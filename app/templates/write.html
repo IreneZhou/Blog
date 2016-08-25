@@ -27,6 +27,21 @@
 	{% endfor %}
 		<form action="" method="post" class="form" role="form" enctype=multipart/form-data>
 			 {{ form.hidden_tag() }}
+{#				<div class="form-group "><label class="control-label" for="category">{{ form.category.label }}</label>#}
+
+			<select class="form-control" id="category" name="category" >
+	        {% for choice in form.category.choices %}
+	        <option value={{choice[0]}} >{{choice[1]}}</option>
+	        {% endfor %}
+	        </select>
+
+					<select class="form-control" id="domain" name="domain" >
+	        {% for choice in form.domain.choices %}
+	        <option value={{choice[0]}} >{{choice[1]}}</option>
+	        {% endfor %}
+	        </select>
+{#	</div>#}
+
 			<div class="input-container">
 				{{ form.title(class="title", placeholder=form.title.label.text )}}
 				<input type="file" name="file" id="file" required>

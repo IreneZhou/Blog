@@ -1,5 +1,6 @@
-<nav>
-	<a href="/index"><h2>地球观察团</h2></a>
+<nav id="nav">
+	<a href="#" data-activates="slide-out" class="button-collapse"><img id="menu" src="../static/images/menu.png"></a></a>
+	<a href="/index"><span id="index">地球观察团</span></a>
 	<ul>
 		<li>
 			<form action="{{ url_for('main.search') }}" method="post" name="search" class="search">
@@ -7,6 +8,7 @@
 				{{ form.search(placeholder="搜索") }}
 			</form>
 		</li>
+
 		<li><a href="/write">发布文章</a></li>
 		{% if current_user.is_authenticated %}
 			<li><a href="/user/{{ current_user.username }}">{{ current_user.username }}</a></li>
@@ -14,4 +16,26 @@
 			<li><a href="/auth/login">登录</a></li>
 		{% endif %}
 	</ul>
+</nav>
+
+<nav id="sidebar">
+  <ul id="slide-out" class="side-nav collapsible" data-collapsible="accordion">
+   <li>
+      <div class="collapsible-header">地理</div>
+      <div class="collapsible-body">
+		  	  	{% for category in category_list %}
+			<a href="{{ url_for('main.category', id=category.id) }}">{{ category.name }}</a>
+	{% endfor %}
+	  </div>
+    </li>
+
+  <li>
+      <div class="collapsible-header">领域</div>
+      <div class="collapsible-body">
+		  	  	{% for domain in domain_list %}
+			<a href="{{ url_for('main.domain', id=domain.id) }}">{{ domain.name }}</a>
+	{% endfor %}
+	  </div>
+    </li>
+  </ul>
 </nav>

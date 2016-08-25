@@ -24,6 +24,12 @@
 <section>
 <div id="mapid"></div>
 <div id="container">
+
+{##}
+{#	{% for category in category_list %}#}
+{#	<a href="{{ url_for('main.category', id=category.id) }}">{{ category.name }}</a>#}
+{#	{% endfor %}#}
+
 	<ul class="posts">
     {% for post in posts %}
 		{% include '_post.html' %}
@@ -39,6 +45,7 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/alert.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
 <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -70,6 +77,14 @@ $(document).ready(function() {
 	}
 	mymap.on('click', onMapClick);
 });
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".button-collapse").sideNav();
+		    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+	});
 </script>
 
 </body>

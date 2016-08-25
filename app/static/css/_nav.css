@@ -2,13 +2,14 @@ a {
 	text-decoration: none;
 }
 
-nav {
+nav#nav {
 	height: 50px;
 }
 
-nav h2 {
+span#index {
 	display: inline-block;
-	margin-left: 40px;
+	vertical-align: middle;
+	margin-left: 10px;
 	color: black;
 	letter-spacing: 4px;
 	font-size: 20px;
@@ -16,13 +17,13 @@ nav h2 {
 	line-height: 50px;
 }
 
-nav ul {
+#nav ul {
 	display: inline-block;
 	float: right;
 	margin-right: 40px;
 }
 
-nav li {
+#nav li {
 	display: inline-block;
 	margin-left: 15px;
 }
@@ -34,6 +35,11 @@ nav a {
 	line-height: 50px;
 }
 
+img#menu {
+	margin-left: 40px;
+	width: 25px;
+}
+
 input#search {
 	outline: none;
 	font-size: 14px;
@@ -43,8 +49,75 @@ input#search {
     height: 28px;
 }
 
-li>a:hover {
-    color: #777;
-    text-decoration: none;
-    opacity: 0.5;
+/*li>a:hover {*/
+    /*color: #777;*/
+    /*text-decoration: none;*/
+    /*opacity: 0.5;*/
+/*}*/
+
+.side-nav {
+    position: fixed;
+    width: 300px;
+    left: 0;
+    top: 0;
+    margin: 0;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    height: 100%;
+    height: calc(100% + 60px);
+    height: -moz-calc(100%);
+    padding-bottom: 60px;
+    background-color: #fff;
+    z-index: 999;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow-y: auto;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-105%);
+    transform: translateX(-105%);
+}
+
+#sidenav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 997;
+    will-change: opacity;
+}
+
+ul.side-nav > li > a {
+	color: #000;
+	font-weight: 200;
+	font-size: 14px;
+}
+
+.collapsible-body >a {
+	display: block;
+	font-weight: 200;
+	padding-left: 60px;
+}
+
+.collapsible-body {
+	display: none;
+}
+
+.collapsible-header {
+	font-size: 16px;
+	padding-left: 30px;
+	height: 50px;
+	margin-top: 40px;
+    line-height: 50px;
+}
+
+.collapsible-header:hover {
+	background-color: #F3F3F3;
+}
+
+.collapsible-body > a:hover {
+	background-color: #F3F3F3;
 }

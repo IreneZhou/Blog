@@ -222,6 +222,7 @@ class Post(db.Model):
 	body = db.Column(db.Text)
 	body_html = db.Column(db.Text)
 	category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+	domain_id = db.Column(db.Integer, db.ForeignKey('domains.id'))
 	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	comments = db.relationship('Comment', backref='post', lazy='dynamic')
@@ -263,7 +264,7 @@ class Category(db.Model):
 
 	@staticmethod
 	def insert_categories():
-		categorylist = ["中亚观", "东亚观", "南亚观", "内亚观", "美洲观", "非洲观", "欧洲观", "杂谈"]
+		categorylist = ["东亚观", "中亚观", "南亚观", "中亚观", "内亚观", "欧洲观", "美洲观", "非洲观", "其他"]
 		for category in categorylist:
 			postcategory = Category.query.filter_by(name=category).first()
 			if postcategory is None:
@@ -273,6 +274,26 @@ class Category(db.Model):
 
 	def __repr__(self):
 		return '<Category %r>' % self.name
+
+
+class Domain(db.Model):
+	__tablename__ = 'domains'
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(64), unique=True)
+	posts = db.relationship('Post', backref='domain', lazy='dynamic')
+
+	@staticmethod
+	def insert_domains():
+		domainlist = ["历史", "政治", "经济", "战争", "文化", "民族", "游记", "探险", "地质", "太空"]
+		for domain in domainlist:
+			postdomain = Domain.query.filter_by(name=domain).first()
+			if not postdomain:
+				postdomain = Domain(name=domain)
+				db.session.add(postdomain)
+		db.session.commit()
+
+	def __repr__(self):
+		return '<Domain %r>' % self.name
 
 
 class Comment(db.Model):
