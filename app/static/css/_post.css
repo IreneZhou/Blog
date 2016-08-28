@@ -64,6 +64,11 @@ img.icon {
 	height: 20px;
 }
 
+img#tag {
+	width: 15px;
+	height: 15px;
+}
+
 a.post-title {
 	font-size: 15px;
 	color: #777;

@@ -3,6 +3,7 @@
 	<title>发布文章</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert.min.css') }}">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+{#	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/materialize.css') }}">#}
 	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/write.css') }}">
 	{% import "bootstrap/wtf.html" as wtf %}
 	{{ pagedown.include_pagedown() }}
@@ -17,30 +18,37 @@
 		</div>
 	{% endfor %}
 
+
 	{% if current_user.can(Permission.WRITE_ARTICLES) %}
+
 		<div id="container">
+
 			{% for message in get_flashed_messages() %}
 		<div class="alert alert-warning">
 			<a class="close" data-dismiss="alert">&times;</a>
 			{{ message }}
 		</div>
 	{% endfor %}
+
+
 		<form action="" method="post" class="form" role="form" enctype=multipart/form-data>
-			 {{ form.hidden_tag() }}
-{#				<div class="form-group "><label class="control-label" for="category">{{ form.category.label }}</label>#}
 
-			<select class="form-control" id="category" name="category" >
-	        {% for choice in form.category.choices %}
-	        <option value={{choice[0]}} >{{choice[1]}}</option>
-	        {% endfor %}
-	        </select>
+			{{ form.hidden_tag() }}
 
-					<select class="form-control" id="domain" name="domain" >
-	        {% for choice in form.domain.choices %}
-	        <option value={{choice[0]}} >{{choice[1]}}</option>
-	        {% endfor %}
-	        </select>
-{#	</div>#}
+
+			<select name="category">
+				<option value="" disabled selected>地理</option>
+				{% for choice in form.category.choices %}
+					 <option value={{ choice[0] }}>{{choice[1]}}</option>
+				{% endfor %}
+			</select>
+
+			<select name="domain">
+				<option value="" disabled selected>领域</option>
+				{% for choice in form.domain.choices %}
+					 <option value={{ choice[0] }}>{{choice[1]}}</option>
+				{% endfor %}
+			</select>
 
 			<div class="input-container">
 				{{ form.title(class="title", placeholder=form.title.label.text )}}
@@ -69,7 +77,14 @@
 	{% endif %}
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/alert.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/alert.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+<script type="text/javascript">
+	 $(document).ready(function() {
+    $('select').material_select();
+  });
+
+</script>
 <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
 <script>
 $( document ).ready(function() {

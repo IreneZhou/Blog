@@ -17,12 +17,22 @@
 					</a>
 				</li>
 
-				<li><span>发表于</span> {{ moment(post.timestamp).format("YYYY-MM-D") }}</li>
+				<li>{{ moment(post.timestamp).format("YYYY-MM-D") }}</li>
 
-				<li>
-					<img class="icon" src="{{ url_for('static', filename='images/comment.png') }}">
-					<span>{{ post.comments.count() }}</span>
-				</li>
+				{% if post.category_id %}
+					<li>
+						<img class="icon" src="{{ url_for('static', filename='images/location.png') }}">
+						<span id="category">{{ post.category.name }}</span>
+					</li>
+				{% endif %}
+
+				{% if post.domain_id %}
+					<li>
+						<img class="icon" id="tag" src="{{ url_for('static', filename='images/tag.png') }}">
+						<span>{{ post.domain.name}}</span>
+					</li>
+				{% endif %}
+
 			</ul>
         </div>
     </div>

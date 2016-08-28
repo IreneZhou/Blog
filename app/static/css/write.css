@@ -10,6 +10,10 @@ body {
 	padding: 60px;
 }
 
+ul {
+    list-style-type: none;
+}
+
 input, button, submit {
 	border:none;
 }
@@ -132,3 +136,74 @@ input#submit-button {
 	float: right;
 }
 
+
+/* selector */
+
+.select-wrapper {
+    position: relative;
+	display: inline-block;
+	width: 23%;
+    margin-right: 20px;
+}
+
+.select-wrapper span.caret {
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 8px;
+    font-size: 12px;
+}
+
+.select-wrapper input.select-dropdown {
+	font-weight: 200;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    outline: none;
+    height: 3rem;
+    line-height: 3rem;
+    width: 100%;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    padding: 0;
+    display: block;
+}
+
+input.select-dropdown {
+	color: white;
+}
+
+.dropdown-content {
+	padding: 0;
+    background-color: #fff;
+    margin: 0;
+    display: none;
+    min-width: 100px;
+    max-height: 650px;
+    overflow-y: auto;
+    opacity: 0;
+    position: absolute;
+    z-index: 999;
+    will-change: width, height;
+}
+
+.dropdown-content > li {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+
+
+.dropdown-content > li:hover {
+	background-color: #F3F3F3;
+}
+
+select.initialized {
+	display: none;
+}
+
+li.disabled {
+	display: none;
+}

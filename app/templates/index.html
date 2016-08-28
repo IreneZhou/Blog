@@ -3,7 +3,6 @@
 	<title>地球观察团</title>
 	{% import "_macros.html" as macros %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert.min.css') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/_nav.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pagination.min.css') }}">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/_post.css') }}"/>
@@ -14,21 +13,59 @@
 </head>
 
 <body>
-{% include '_nav.html' %}
-	{% for message in get_flashed_messages() %}
-	<div class="alert alert-warning">
-		<a class="close" data-dismiss="alert">&times;</a>
-		{{ message }}
-	</div>
+
+<nav id="nav">
+	<a href="#" data-activates="slide-out" class="button-collapse"><img id="menu" src="../static/images/menu.png"></a></a>
+	<a href="/index"><span id="index">地球观察团</span></a>
+	<ul>
+		<li>
+			<form action="{{ url_for('main.search') }}" method="post" name="search" class="search">
+				{{ form.hidden_tag() }}
+				{{ form.search(placeholder="搜索") }}
+			</form>
+		</li>
+
+		<li><a href="/write">发布文章</a></li>
+		{% if current_user.is_authenticated %}
+			<li><a href="/user/{{ current_user.username }}">{{ current_user.username }}</a></li>
+		{% else %}
+			<li><a href="/auth/login">登录</a></li>
+		{% endif %}
+	</ul>
+</nav>
+
+<nav id="sidebar">
+  <ul id="slide-out" class="side-nav collapsible" data-collapsible="accordion">
+   <li>
+	  <div class="collapsible-header">地理</div>
+	  <div class="collapsible-body">
+				{% for category in category_list %}
+			<a href="{{ url_for('main.category', id=category.id) }}">{{ category.name }}</a>
 	{% endfor %}
+	  </div>
+	</li>
+
+  <li>
+	  <div class="collapsible-header">领域</div>
+	  <div class="collapsible-body">
+				{% for domain in domain_list %}
+			<a href="{{ url_for('main.domain', id=domain.id) }}">{{ domain.name }}</a>
+	{% endfor %}
+	  </div>
+	</li>
+  </ul>
+</nav>
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-warning">
+	<a class="close" data-dismiss="alert">&times;</a>
+	{{ message }}
+</div>
+{% endfor %}
+
 <section>
 <div id="mapid"></div>
 <div id="container">
-
-{##}
-{#	{% for category in category_list %}#}
-{#	<a href="{{ url_for('main.category', id=category.id) }}">{{ category.name }}</a>#}
-{#	{% endfor %}#}
 
 	<ul class="posts">
     {% for post in posts %}
