@@ -32,9 +32,9 @@ input, button, submit {
   	box-shadow: 10px 10px 15px #333;
   	padding: 25px 30px;
 	width: 48%;
-	height: 100%;
+	height: 800px;
 	display: inline-block;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 2em;
 }
 
@@ -50,7 +50,6 @@ input, button, submit {
 	box-shadow: none;
 	padding-top: 20px;
 	line-height: 2em;
-	font-size: 16px;
 	resize: none;
 }
 
@@ -142,7 +141,7 @@ input#submit-button {
 .select-wrapper {
     position: relative;
 	display: inline-block;
-	width: 23%;
+	width: 100%;
     margin-right: 20px;
 }
 
@@ -204,6 +203,18 @@ select.initialized {
 	display: none;
 }
 
-li.disabled {
-	display: none;
+
+.col-6 {
+	width: 48%;
+	display: inline-block;
+}
+
+.col-3 {
+	display: inline-block;
+	width: 23%;
+	margin-right: 20px;
+}
+
+.float-right {
+	float: right;
 }

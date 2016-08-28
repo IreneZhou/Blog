@@ -223,6 +223,7 @@ class Post(db.Model):
 	body_html = db.Column(db.Text)
 	category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 	domain_id = db.Column(db.Integer, db.ForeignKey('domains.id'))
+	topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
 	timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	comments = db.relationship('Comment', backref='post', lazy='dynamic')
@@ -294,6 +295,16 @@ class Domain(db.Model):
 
 	def __repr__(self):
 		return '<Domain %r>' % self.name
+
+
+class Topic(db.Model):
+	__tablename__ = 'topics'
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(64), unique=True)
+	posts = db.relationship('Post', backref='topic', lazy='dynamic')
+
+	def __repr__(self):
+		return '<Topic %r>' % self.name
 
 
 class Comment(db.Model):

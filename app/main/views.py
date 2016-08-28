@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 from . import main
 from .. import db, admin
 from flask_admin.contrib.sqla import ModelView
-from .forms import LoginForm, PostForm, CommentForm, EditProfileForm, SearchForm
-from ..models import User, Post, Permission, Comment, Star, Role, Category, Domain
+from .forms import LoginForm, PostForm, CommentForm, EditProfileForm, SearchForm, TopicForm
+from ..models import User, Post, Permission, Comment, Star, Role, Category, Domain, Topic
 import base64
 
 
@@ -19,15 +19,14 @@ def index():
 	form = SearchForm()
 	category_list = Category.query.all()
 	domain_list = Domain.query.all()
+	topic_list = Topic.query.all()
 	page = request.args.get('page', 1, type=int)
 	pagination = Post.query.order_by(Post.timestamp.desc()).paginate(
 		page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 	posts = pagination.items
 	all_posts = Post.query.all()
-	return render_template('index.html', category_list=category_list,
-						   domain_list=domain_list,
-						   posts=posts, pagination=pagination, user=user, form=form,
-						   all_posts=all_posts)
+	return render_template('index.html', category_list=category_list, domain_list=domain_list, topic_list=topic_list,
+						   posts=posts, pagination=pagination, user=user, form=form, all_posts=all_posts)
 
 
 @main.route('/category/<int:id>')
@@ -35,6 +34,7 @@ def category(id):
 	category = Category.query.get_or_404(id)
 	category_list = Category.query.all()
 	domain_list = Domain.query.all()
+	topic_list = Topic.query.all()
 	form = SearchForm()
 	all_posts = Post.query.all()
 	page = request.args.get('page', 1, type=int)
@@ -42,7 +42,7 @@ def category(id):
 		page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 	posts = pagination.items
 	return render_template('index.html', category=category, category_list=category_list,
-						   domain_list=domain_list,
+						   domain_list=domain_list, topic_list=topic_list,
 						   posts=posts,  pagination=pagination, user=user,
 						   form=form, all_posts=all_posts)
 
@@ -51,6 +51,7 @@ def domain(id):
 	domain = Domain.query.get_or_404(id)
 	category_list = Category.query.all()
 	domain_list = Domain.query.all()
+	topic_list=Topic.query.all()
 	form = SearchForm()
 	all_posts = Post.query.all()
 	page = request.args.get('page', 1, type=int)
@@ -58,14 +59,27 @@ def domain(id):
 		page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 	posts = pagination.items
 	return render_template('index.html', domain=domain, category_list=category_list,
-						   domain_list=domain_list,
+						   domain_list=domain_list,topic_list=topic_list,
 						   posts=posts,  pagination=pagination, user=user,
 						   form=form, all_posts=all_posts)
 
-# @main.route('/login', methods=['GET', 'POST'])
-# def login():
-# 	form = LoginForm()
-# 	return render_template('login.html', form=form, title="加入")
+
+@main.route('/topic/<int:id>')
+def topic(id):
+	topic = Topic.query.get_or_404(id)
+	category_list = Category.query.all()
+	domain_list = Domain.query.all()
+	topic_list = Topic.query.all()
+	form = SearchForm()
+	all_posts = Post.query.all()
+	page = request.args.get('page', 1, type=int)
+	pagination = topic.posts.order_by(Post.timestamp.desc()).paginate(
+		page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
+	posts = pagination.items
+	return render_template('index.html', topic=topic, category_list=category_list,
+						   domain_list=domain_list, topic_list=topic_list,
+						   posts=posts,  pagination=pagination, user=user,
+						   form=form, all_posts=all_posts)
 
 
 @main.route('/user/<username>', methods=['GET', 'POST'])
@@ -112,30 +126,31 @@ def write():
 		flash("抱歉，您暂时没有发布权限")
 	all_posts = Post.query.all()
 	form = PostForm()
-	category = Category()
 	if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
-		if 'file' not in request.files:
-			flash('No file part')
-			return redirect(request.url)
-		file = request.files['file']
-		if file.filename == '':
-			flash('没有上传题图')
-			return redirect(request.url)
-		if file and allowed_file(file.filename):
-			filename = secure_filename(file.filename)
-			file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-		post = Post(body=form.body.data, title=form.title.data, lat=form.lat.data, long=form.long.data,
-					author=current_user._get_current_object(), domain=Domain.query.get(form.domain.data),
-					category=Category.query.get(form.category.data),
-					photo=os.path.join("static/images/uploads/", filename))
-		db.session.add(post)
-		try:
-			db.session.commit()
-			flash("成功发布!")
-			return redirect(url_for('main.post', id=post.id))
-		except IntegrityError:
-			db.session.rollback()
-			flash("发布失败")
+		if 'file' in request.files:
+			file = request.files['file']
+			if file.filename == '':
+				flash('没有上传题图')
+				return redirect(request.url)
+			elif file and allowed_file(file.filename):
+				filename = secure_filename(file.filename)
+				file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+
+				post = Post(body=form.body.data, title=form.title.data, lat=form.lat.data, long=form.long.data,
+							author=current_user._get_current_object(),
+							domain=Domain.query.get(form.domain.data),
+							category=Category.query.get(form.category.data),
+							topic=Topic.query.get(form.topic.data),
+							photo=os.path.join("static/images/uploads/", filename))
+
+				db.session.add(post)
+				try:
+					db.session.commit()
+					flash("成功发布!")
+					return redirect(url_for('main.post', id=post.id))
+				except IntegrityError:
+					db.session.rollback()
+					flash("发布失败")
 	return render_template('write.html', form=form, all_posts=all_posts)
 
 
@@ -144,21 +159,38 @@ def write():
 def edit(id):
 	all_posts = Post.query.all()
 	post = Post.query.get_or_404(id)
+
 	if current_user != post.author and not current_user.can(Permission.ADMINISTER):
 		abort(403)
 	form = PostForm()
+
+	if 'file' in request.files:
+		file = request.files['file']
+		if file and allowed_file(file.filename):
+			filename = secure_filename(file.filename)
+			file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+			post.photo = os.path.join("static/images/uploads/", filename)
+
 	if form.validate_on_submit():
 		post.title = form.title.data
 		post.body = form.body.data
 		post.lat = form.lat.data
 		post.long = form.long.data
+		post.category = Category.query.get(form.category.data)
+		post.domain = Domain.query.get(form.domain.data)
+		post.topic = Topic.query.get(form.topic.data)
 		db.session.add(post)
 		db.session.commit()
 		return redirect(url_for('main.post', id=post.id))
+
 	form.body.data = post.body
 	form.title.data = post.title
 	form.lat.data = post.lat
 	form.long.data = post.long
+	form.category.data = post.category_id
+	form.domain.data = post.domain_id
+	form.topic.data = post.topic_id
+	form.photo.data = post.photo
 	return render_template('write.html', form=form, all_posts=all_posts)
 
 
@@ -229,5 +261,8 @@ admin.add_view(MyView(User, db.session))
 admin.add_view(MyView(Post, db.session))
 admin.add_view(MyView(Comment, db.session))
 admin.add_view(MyView(Role, db.session))
+admin.add_view(MyView(Category, db.session))
+admin.add_view(MyView(Domain, db.session))
+admin.add_view(MyView(Topic, db.session))
 
 

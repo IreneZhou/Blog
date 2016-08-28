@@ -2,7 +2,7 @@ from flask_wtf import Form
 from flask_pagedown.fields import PageDownField
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, DecimalField
 from wtforms.validators import DataRequired, Email, Length
-from ..models import Category, Domain
+from ..models import Category, Domain, Topic
 
 
 class LoginForm(Form):
@@ -13,11 +13,13 @@ class LoginForm(Form):
 
 class PostForm(Form):
 	title = StringField('标题', validators=[DataRequired(), Length(3, 64)])
+	body = PageDownField(validators=[DataRequired()])
 	category = SelectField('地理', coerce=int)
 	domain = SelectField('领域', coerce=int)
+	topic = SelectField('专题', coerce=int)
 	lat = DecimalField('维度', places=1)
 	long = DecimalField('经度', places=1)
-	body = PageDownField(validators=[DataRequired()])
+	photo = TextAreaField()
 	submit = SubmitField("发布")
 
 	def __init__(self, *args, **kwargs):  # 定义下拉选择表
@@ -26,6 +28,8 @@ class PostForm(Form):
 								 for category in Category.query.order_by(Category.name).all()]
 		self.domain.choices = [(domain.id, domain.name)
 								 for domain in Domain.query.order_by(Domain.name).all()]
+		self.topic.choices = [(topic.id, topic.name)
+							   for topic in Topic.query.order_by(Topic.name).all()]
 
 
 class EditProfileForm(Form):
@@ -46,3 +50,5 @@ class SearchForm(Form):
 	search = StringField('搜索', validators=[DataRequired()])
 	submit = SubmitField()
 
+class TopicForm(Form):
+	name = StringField('专题', validators=[DataRequired()])

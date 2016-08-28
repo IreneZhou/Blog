@@ -39,20 +39,31 @@
    <li>
 	  <div class="collapsible-header">地理</div>
 	  <div class="collapsible-body">
-				{% for category in category_list %}
-			<a href="{{ url_for('main.category', id=category.id) }}">{{ category.name }}</a>
-	{% endfor %}
+		  {% for category in category_list %}
+			  <a href="{{ url_for('main.category', id=category.id) }}">{{ category.name }}</a>
+		  {% endfor %}
 	  </div>
-	</li>
+   </li>
 
   <li>
 	  <div class="collapsible-header">领域</div>
 	  <div class="collapsible-body">
-				{% for domain in domain_list %}
-			<a href="{{ url_for('main.domain', id=domain.id) }}">{{ domain.name }}</a>
-	{% endfor %}
+		  {% for domain in domain_list %}
+			  <a href="{{ url_for('main.domain', id=domain.id) }}">{{ domain.name }}</a>
+		  {% endfor %}
+	  </div>
+  </li>
+
+    <li>
+	  <div class="collapsible-header">专题</div>
+	  <div class="collapsible-body">
+		  {% for topic in topic_list %}
+			  <a href="{{ url_for('main.topic', id=topic.id) }}">{{ topic.name }}</a>
+		  {% endfor %}
 	  </div>
 	</li>
+
+
   </ul>
 </nav>
 

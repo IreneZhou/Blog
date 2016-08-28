@@ -35,20 +35,36 @@
 
 			{{ form.hidden_tag() }}
 
+		<div class="row">
+			<div class="col-3">
+				<select name="category">
+					<option value="" disabled selected>地理</option>
+					{% for choice in form.category.choices %}
+						 <option value={{ choice[0] }}>{{choice[1]}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="col-3">
+				<select name="domain">
+					<option value="" disabled selected>领域</option>
+					{% for choice in form.domain.choices %}
+						 <option value={{ choice[0] }}>{{choice[1]}}</option>
+					{% endfor %}
+				</select>
+			</div>
 
-			<select name="category">
-				<option value="" disabled selected>地理</option>
-				{% for choice in form.category.choices %}
-					 <option value={{ choice[0] }}>{{choice[1]}}</option>
-				{% endfor %}
-			</select>
+			<div class="col-6 float-right" >
+				<select name="topic">
+					<option value="" disabled selected>专题</option>
+					{% for choice in form.topic.choices %}
+						 <option value={{ choice[0] }}>{{choice[1]}}</option>
+					{% endfor %}
+				</select>
 
-			<select name="domain">
-				<option value="" disabled selected>领域</option>
-				{% for choice in form.domain.choices %}
-					 <option value={{ choice[0] }}>{{choice[1]}}</option>
-				{% endfor %}
-			</select>
+			</div>
+		</div>
+
+
 
 			<div class="input-container">
 				{{ form.title(class="title", placeholder=form.title.label.text )}}

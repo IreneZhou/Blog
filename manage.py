@@ -26,3 +26,13 @@ def test():
 	import unittest
 	tests = unittest.TestLoader().discover('tests')
 	unittest.TextTestRunner(verbosity=2).run(tests)
+
+
+# #测试数据库初始化
+# @manager.command
+# def datainit():
+# 	from app.models import Role, Category, Domain
+# 	Category.insert_categories()
+# 	Role.insert_roles()
+# 	Domain.insert_domains()
+# 	print("data is ready")

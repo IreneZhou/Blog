@@ -177,13 +177,9 @@ ul.side-nav > li > a {
 	padding-left: 60px;
 }
 
-.collapsible-body {
-	display: none;
-}
-
 .collapsible-header {
 	font-size: 16px;
-	padding-left: 30px;
+	padding-left: 40px;
 	height: 50px;
     line-height: 50px;
 }
