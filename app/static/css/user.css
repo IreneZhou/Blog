@@ -198,10 +198,25 @@ img.photo {
 	margin: auto;
 }
 
-div.post {
-	width: 570px;
-}
+
 div.post:nth-child(odd) {
     margin-right: 40px;
 }
 
+.wrapper {
+	width: 48%;
+}
+
+.wrapper:nth-child(even) {
+    float: right;
+}
+
+@media (max-width: 700px) {
+	.wrapper {
+		width: 100%;
+	}
+}
+
+.material-icons {
+	font-size: 18px;
+}

@@ -5,6 +5,9 @@ html {
 * {
 	margin: 0;
 	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 a {
@@ -18,6 +21,7 @@ a:hover {
 body {
 	background: white;
 	height: 100%;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #mapid {
@@ -39,21 +43,11 @@ section {
 	position: relative;
 }
 
-
-
 div.pagination {
 	display: block;
 	text-align: center;
 }
 
-@media screen and (max-width: 720px) {
-	#mapid {
-		display: none;
-	}
-	#container {
-		width: 100%;
-	}
-}
 
 .pop-img {
     width: 280px;
@@ -78,6 +72,7 @@ a.popup-title {
 
 nav#nav {
 	height: 50px;
+	padding: 0 40px;
 }
 
 span#index {
@@ -94,7 +89,6 @@ span#index {
 #nav ul {
 	display: inline-block;
 	float: right;
-	margin-right: 40px;
 }
 
 #nav li {
@@ -110,11 +104,15 @@ nav a {
 }
 
 img#menu {
-	margin-left: 40px;
 	width: 25px;
 }
 
+input#search:hover {
+	border: none;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
 input#search {
+	border: 1px solid #DFDFDF;
 	outline: none;
 	font-size: 14px;
     font-weight: lighter;
@@ -190,4 +188,52 @@ ul.side-nav > li > a {
 
 .collapsible-body > a:hover {
 	background-color: #F3F3F3;
+}
+
+
+
+.material-icons {
+	vertical-align: middle;
+	font-size: 22px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: 'liga';
+     -moz-font-feature-settings: 'liga';
+          font-feature-settings: 'liga';
+}
+
+
+a.button {
+	text-align: center;
+	display: block;
+	width: 80%;
+	height: 50px;
+	background-color: black;
+	position: absolute;
+	bottom: 150px;
+	left: 10%;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.white {
+	color: white;
+}
+
+
+/* responsive design*/
+@media screen and (max-width: 780px) {
+	#mapid {
+		display: none;
+	}
+	#container {
+		width: 100%;
+	}
+}
+
+@media (max-width: 500px) {
+	.login {
+		display: none;
+	}
+
 }

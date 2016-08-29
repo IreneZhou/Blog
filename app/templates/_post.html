@@ -1,4 +1,6 @@
-    <div class="post">
+<div class="wrapper">
+<div class="dummy"></div>
+<div class="post">
 		<div class="cover-photo">
 			<a class="post-header" href="/post/{{ post.id }}" style="opacity: 1;
 					background:url(../{{ post.photo }}) no-repeat; background-position: center; background-size: cover;"></a>
@@ -21,18 +23,19 @@
 
 				{% if post.category_id %}
 					<li>
-						<img class="icon" src="{{ url_for('static', filename='images/location.png') }}">
+						<i class="material-icons">location_on</i>
 						<span id="category">{{ post.category.name }}</span>
 					</li>
 				{% endif %}
 
 				{% if post.domain_id %}
 					<li>
-						<img class="icon" id="tag" src="{{ url_for('static', filename='images/tag.png') }}">
-						<span>{{ post.domain.name}}</span>
+						 <i class="material-icons">label</i>
+						 <span>{{ post.domain.name}}</span>
 					</li>
 				{% endif %}
 
 			</ul>
         </div>
     </div>
+</div>

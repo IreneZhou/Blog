@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<html>
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>{{ post.title }}</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	{% import "_macros.html" as macros %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_nav.css') }}">
+{#	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_nav.css') }}">#}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/post.css') }}">
-
 	{{ moment.include_jquery() }}
 	{{ moment.include_moment() }}
 </head>
@@ -30,22 +34,19 @@
 	</ul>
 </nav>
 
-	{% if get_flashed_messages() %}
-	{% for message in get_flashed_messages() %}
-		<div class="alert alert-warning">
-			<a class="close" data-dismiss="alert">&times;</a>
-			{{ message }}
-		</div>
-	{% endfor %}
-	{% endif %}
-
-	<div id="preview">
-
-
-	<img class="cover" src="../{{ post.photo }}">
+{% if get_flashed_messages() %}
+{% for message in get_flashed_messages() %}
+	<div class="alert alert-warning">
+		<a class="close" data-dismiss="alert">&times;</a>
+		{{ message }}
 	</div>
+{% endfor %}
+{% endif %}
 
-	<div class="container">
+
+<img class="cover" src="../{{ post.photo }}">
+
+<article>
 
 		<div class="post-title">{{ post.title }}</div>
 		<div class="post-author">
@@ -146,7 +147,7 @@
 		</ul></div>
 		{% endif %}
 
-	</div>
+	</article>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript">

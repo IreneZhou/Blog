@@ -1,13 +1,16 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 <head>
+	<meta charset="UTF-8">
 	<title>地球观察团</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	{% import "_macros.html" as macros %}
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pagination.min.css') }}">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/_post.css') }}"/>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
-
 	{{ moment.include_jquery() }}
 	{{ moment.include_moment() }}
 </head>
@@ -24,12 +27,10 @@
 				{{ form.search(placeholder="搜索") }}
 			</form>
 		</li>
-
-		<li><a href="/write">发布文章</a></li>
 		{% if current_user.is_authenticated %}
-			<li><a href="/user/{{ current_user.username }}">{{ current_user.username }}</a></li>
+			<li class="login"><a href="/user/{{ current_user.username }}">{{ current_user.username }}</a></li>
 		{% else %}
-			<li><a href="/auth/login">登录</a></li>
+			<li class="login"><a href="/auth/login">登录</a></li>
 		{% endif %}
 	</ul>
 </nav>
@@ -64,15 +65,17 @@
 	</li>
 
 
+  <li>
+	  <a class="button" href="/write">
+		  <i class="material-icons white">mode_edit</i>
+		  <span class="white">发布文章</span>
+	  </a>
+  </li>
   </ul>
+
 </nav>
 
-{% for message in get_flashed_messages() %}
-<div class="alert alert-warning">
-	<a class="close" data-dismiss="alert">&times;</a>
-	{{ message }}
-</div>
-{% endfor %}
+{% include "_alert.html" %}
 
 <section>
 <div id="mapid"></div>
@@ -105,7 +108,6 @@ $(document).ready(function() {
 		'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		id: 'mapbox.streets'
 	}).addTo(mymap);
-
 	{% for post in all_posts %}
 		var lat = {{ post.lat }};
 		var long = {{ post.long }};
@@ -114,7 +116,6 @@ $(document).ready(function() {
 				.bindPopup('<a class="popup-title" href="/post/{{ post.id }}">{{ post.title }}<img class="pop-img" src="../{{ post.photo }}"></a>')
 				.openPopup();
 	{% endfor %}
-
 	var popup = L.popup();
 
 	function onMapClick(e) {
@@ -123,6 +124,7 @@ $(document).ready(function() {
 				.setContent("坐标 ( " + Math.round(e.latlng.lat * 100) / 100 + ", " + Math.round(e.latlng.lng * 100) / 100 + " )")
 				.openOn(mymap);
 	}
+
 	mymap.on('click', onMapClick);
 });
 </script>

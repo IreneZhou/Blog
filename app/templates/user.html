@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+<html>
 <head>
+	<title>{{ user.username }}的个人主页</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/_post.css') }}"/>
 	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/user.css') }}">
 	{% import "bootstrap/wtf.html" as wtf %}
@@ -31,8 +34,11 @@
 				{% endif %}
 			</span>
 			{% if user.location %}
-				<span><img class="location" src="{{ url_for('static', filename='images/location.png') }}">
-				{{ user.location }}</span>
+
+				<span>
+					<i class="material-icons">location_on</i>
+					{{ user.location }}
+				</span>
 			{% endif %}
 			{% if user.about_me %}
 				<span id="about_me">{{ user.about_me }}</span>

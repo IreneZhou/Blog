@@ -144,6 +144,7 @@ def write():
 							photo=os.path.join("static/images/uploads/", filename))
 
 				db.session.add(post)
+
 				try:
 					db.session.commit()
 					flash("成功发布!")

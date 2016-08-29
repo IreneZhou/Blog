@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<head>
-	<title>地球观察团</title>
+{% extends "base.html" %}
+{% block title %}搜索结果-地球观察团{% endblock %}
+{% block head %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_nav.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_post.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search_results.css') }}">
 	{{ moment.include_jquery() }}
 	{{ moment.include_moment() }}
-</head>
-
-<body>
-{% include '_nav.html' %}
-<div id="container">
-<div id="search-result">"{{ query }}" 搜索结果:</div>
-{% for post in results %}
-	{% include '_post.html' %}
-{% endfor %}
-</div>
-</body>
+{% endblock %}
+{% block body %}
+	{% include '_nav.html' %}
+	<div id="container">
+		<div id="search-result">"{{ query }}" 搜索结果:</div>
+			{% for post in results %}
+				{% include '_post.html' %}
+			{% endfor %}
+		</div>
+{% endblock %}
