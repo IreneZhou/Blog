@@ -4,8 +4,6 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_nav.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_post.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search_results.css') }}">
-	{{ moment.include_jquery() }}
-	{{ moment.include_moment() }}
 {% endblock %}
 {% block body %}
 	{% include '_nav.html' %}
@@ -15,4 +13,6 @@
 				{% include '_post.html' %}
 			{% endfor %}
 		</div>
+	{{ moment.include_jquery() }}
+	{{ moment.include_moment() }}
 {% endblock %}

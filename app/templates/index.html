@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-	<meta charset="UTF-8">
-	<title>地球观察团</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	{% import "_macros.html" as macros %}
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block head %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pagination.min.css') }}">
 	<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
@@ -13,10 +8,9 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
 	{{ moment.include_jquery() }}
 	{{ moment.include_moment() }}
-</head>
+{% endblock %}
 
-<body>
-
+{% block body %}
 <nav id="nav">
 	<a href="#" data-activates="slide-out" class="button-collapse"><img id="menu" src="../static/images/menu.png"></a></a>
 	<a href="/index"><span id="index">地球观察团</span></a>
@@ -117,25 +111,21 @@ $(document).ready(function() {
 				.openPopup();
 	{% endfor %}
 	var popup = L.popup();
-
 	function onMapClick(e) {
 		popup
 				.setLatLng(e.latlng)
 				.setContent("坐标 ( " + Math.round(e.latlng.lat * 100) / 100 + ", " + Math.round(e.latlng.lng * 100) / 100 + " )")
 				.openOn(mymap);
 	}
-
 	mymap.on('click', onMapClick);
 });
 </script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".button-collapse").sideNav();
-		    $('.collapsible').collapsible({
-      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    });
+		$('.collapsible').collapsible({
+      		accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    	});
 	});
 </script>
-
-</body>
-</html>
+{% endblock %}

@@ -7,17 +7,14 @@
 }
 
 body {
+	background: white;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 200;
+	font-size: 14px;
 }
 
 ul, ol {
 	list-style: none;
-}
-
-
-a {
-	text-decoration: none;
-	color: black;
 }
 
 div#preview {
@@ -231,3 +228,10 @@ input#search {
     height: 28px;
 }
 
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
