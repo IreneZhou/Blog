@@ -1,4 +1,5 @@
 import os
+from wtforms import validators
 from flask import render_template, abort, session, redirect, url_for, request, flash, g, jsonify
 from flask_login import current_user, current_app, login_required
 from sqlalchemy.exc import IntegrityError
@@ -136,12 +137,20 @@ def write():
 				filename = secure_filename(file.filename)
 				file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
 
-				post = Post(body=form.body.data, title=form.title.data, lat=form.lat.data, long=form.long.data,
+				post = Post(body=form.body.data,
+							title=form.title.data,
+							lat=form.lat.data,
+							long=form.long.data,
 							author=current_user._get_current_object(),
-							domain=Domain.query.get(form.domain.data),
-							category=Category.query.get(form.category.data),
-							topic=Topic.query.get(form.topic.data),
 							photo=os.path.join("static/images/uploads/", filename))
+
+				if form.topic.data:
+					post.topic = Topic.query.get(form.topic.data)
+				if form.category.data:
+					post.category = Category.query.get(form.category.data)
+				if form.domain.data:
+					post.domain = Domain.query.get(form.domain.data)
+
 
 				db.session.add(post)
 
@@ -165,21 +174,26 @@ def edit(id):
 		abort(403)
 	form = PostForm()
 
-	if 'file' in request.files:
-		file = request.files['file']
-		if file and allowed_file(file.filename):
-			filename = secure_filename(file.filename)
-			file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-			post.photo = os.path.join("static/images/uploads/", filename)
 
 	if form.validate_on_submit():
+
+		if 'file' in request.files:
+			file = request.files['file']
+			if file and allowed_file(file.filename):
+				filename = secure_filename(file.filename)
+				file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+				post.photo = os.path.join("static/images/uploads/", filename)
+
 		post.title = form.title.data
 		post.body = form.body.data
 		post.lat = form.lat.data
 		post.long = form.long.data
-		post.category = Category.query.get(form.category.data)
-		post.domain = Domain.query.get(form.domain.data)
-		post.topic = Topic.query.get(form.topic.data)
+		if form.topic.data:
+			post.topic = Topic.query.get(form.topic.data)
+		if form.category.data:
+			post.category = Category.query.get(form.category.data)
+		if form.domain.data:
+			post.domain = Domain.query.get(form.domain.data)
 		db.session.add(post)
 		db.session.commit()
 		return redirect(url_for('main.post', id=post.id))
@@ -188,10 +202,9 @@ def edit(id):
 	form.title.data = post.title
 	form.lat.data = post.lat
 	form.long.data = post.long
-	form.category.data = post.category_id
-	form.domain.data = post.domain_id
-	form.topic.data = post.topic_id
-	form.photo.data = post.photo
+	form.domain.data = post.domain
+	form.category.data = post.category
+	form.topic = post.topic
 	return render_template('write.html', form=form, all_posts=all_posts)
 
 

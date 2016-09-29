@@ -5,25 +5,38 @@
 	<link rel="stylesheet"  href = "{{ url_for('static', filename='css/write.css') }}">
 	{{ pagedown.include_pagedown() }}
 	{{ moment.include_moment() }}
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({
+    		selector: 'textarea',  // change this value according to your HTML
+  			plugins: "paste",
+			menubar: false,
+			toolbar: "undo, redo, paste, bold, italic, underline, strikethrough, subscript, superscript, removeformat, formats",
+			content_style: "div, p { font-size: 14px; }",
+  			a_plugin_option: true,
+			paste_data_images: true,
+  			a_configuration_option: 400,
+			height: 700
+		});
+	</script>
 {% endblock %}
+
 {% block body %}
 	{% include "_alert.html" %}
 	{% if current_user.can(Permission.WRITE_ARTICLES) %}
 		<div id="container">
 
 			{% for message in get_flashed_messages() %}
-		<div class="alert alert-warning">
-			<a class="close" data-dismiss="alert">&times;</a>
-			{{ message }}
-		</div>
-	{% endfor %}
-
+				<div class="alert alert-warning">
+					<a class="close" data-dismiss="alert">&times;</a>
+					{{ message }}
+				</div>
+			{% endfor %}
 
 		<form action="" method="post" class="form" role="form" enctype=multipart/form-data>
 
 			{{ form.hidden_tag() }}
 
-		<div class="row">
+			<div class="row">
 			<div class="col-3">
 				<select name="category">
 					<option value="" disabled selected>地理</option>
@@ -40,7 +53,6 @@
 					{% endfor %}
 				</select>
 			</div>
-
 			<div class="col-6 float-right" >
 				<select name="topic">
 					<option value="" disabled selected>专题</option>
@@ -48,24 +60,17 @@
 						 <option value={{ choice[0] }}>{{choice[1]}}</option>
 					{% endfor %}
 				</select>
-
 			</div>
 		</div>
 
-
-
 			<div class="input-container">
 				{{ form.title(class="title", placeholder=form.title.label.text )}}
-				<input type="file" name="file" id="file" required>
+				<input type="file" name="file" id="file">
 				<label for="file">上传主图</label>
 			</div>
 
-			<div class="markdown">
-				{{ form.body(only_input=True, class="editor") }}
-			</div>
-			<div class="markdown" id="md-2">
-				{{ form.body(only_preview=True) }}
-			</div>
+			{{ form.body(only_input=True) }}
+
 			<div id="mapid"></div>
 
 			<div id="submit-row">

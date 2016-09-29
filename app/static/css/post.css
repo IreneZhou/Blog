@@ -54,7 +54,7 @@ article {
 .post-body {
 	line-height: 2em;
 	font-size: 15px;
-	width: 800px;
+	width: 1024px;
 	margin: auto;
 	font-weight: 200;
 }
@@ -66,7 +66,7 @@ form.comment-form {
     border-radius: 4px;
     box-shadow: 0 2px 6px 2px rgba(19, 35, 47, 0.3);
 	position: relative;
-	width: 800px;
+	width: 1024px;
 	margin: 0 auto 40px auto;
 }
 
@@ -134,7 +134,7 @@ comment > p {
 }
 
 .response {
-	width: 800px;
+	width: 1024px;
 	height: 20px;
 	margin: 30px auto;
 }
@@ -220,6 +220,7 @@ img#menu {
 }
 
 input#search {
+	border: 1px solid #DFDFDF;
 	outline: none;
 	font-size: 14px;
     font-weight: lighter;
@@ -234,4 +235,62 @@ a {
 
 a:hover {
 	text-decoration: none;
+}
+
+
+/* responsive design */
+@media only screen
+and (max-device-width : 1024px) {
+	.post-body {
+		font-size: 11px;
+	}
+	.post-body, .response, form.comment-form {
+		width: auto;
+	}
+	.post-title {
+		font-size: 20px;
+	}
+	.post-author {
+		font-size: 15px;
+	}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+	.post-body, .response, form.comment-form {
+		padding: 0 40px;
+	}
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+	.login {
+		display: none;
+	}
+	span#index {
+		font-size: 18px;
+		margin-left: 20px;
+		letter-spacing: 0;
+	}
+	input#search {
+		width: 160px;
+	}
+	#nav ul {
+		margin: 10px 0 0 0;
+	}
+	.post-title {
+		font-size: 16px;
+		margin-bottom: 10px;
+	}
+	.post-body, .response, form.comment-form {
+		padding: 0 20px;
+	}
+	.post-author {
+		font-size: 12px;
+		margin-bottom: 10px;
+	}
 }

@@ -1,7 +1,7 @@
 from flask_wtf import Form
 from flask_pagedown.fields import PageDownField
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, DecimalField
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import DataRequired, Email, Length, Optional
 from ..models import Category, Domain, Topic
 
 
@@ -14,9 +14,9 @@ class LoginForm(Form):
 class PostForm(Form):
 	title = StringField('标题', validators=[DataRequired(), Length(3, 64)])
 	body = PageDownField(validators=[DataRequired()])
-	category = SelectField('地理', coerce=int)
-	domain = SelectField('领域', coerce=int)
-	topic = SelectField('专题', coerce=int)
+	category = SelectField('地理', coerce=int, validators=[Optional()])
+	domain = SelectField('领域', coerce=int, validators=[Optional()])
+	topic = SelectField('专题', coerce=int, validators=[Optional()])
 	lat = DecimalField('维度', places=1)
 	long = DecimalField('经度', places=1)
 	photo = TextAreaField()

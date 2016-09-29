@@ -10,7 +10,7 @@
 
 {% block body %}
 	<div id="profile" style="opacity: 1; background:url(http://bit.ly/2ak240S) no-repeat;
-	background-position: center; background-size: cover;">
+	background-position: center; background-size: cover; width: 100%">
 		<nav>
 			<a href="/index">
 				<h2>地球观察团</h2>
@@ -31,11 +31,7 @@
 				{% endif %}
 			</span>
 			{% if user.location %}
-
-				<span>
-					<i class="material-icons">location_on</i>
-					{{ user.location }}
-				</span>
+				<span>潜伏地：{{ user.location }}</span>
 			{% endif %}
 			{% if user.about_me %}
 				<span id="about_me">{{ user.about_me }}</span>

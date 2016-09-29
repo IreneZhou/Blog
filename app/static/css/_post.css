@@ -42,11 +42,6 @@ div.post {
 	font-weight: 200;
 }
 
-@media (max-width: 1024px) {
-	.metas {
-		display: none;
-	}
-}
 
 .metas {
 	display: block;
@@ -91,7 +86,6 @@ img {
 }
 
 .metas .material-icons {
-	font-size: 18px;
 	color: #C8C8C8;
 	vertical-align: middle;
 }

@@ -12,7 +12,10 @@
 
 {% block body %}
 <nav id="nav">
-	<a href="#" data-activates="slide-out" class="button-collapse"><img id="menu" src="../static/images/menu.png"></a></a>
+	<a href="#" data-activates="slide-out" class="button-collapse">
+		<i class="material-icons">list</i>
+	</a>
+
 	<a href="/index"><span id="index">地球观察团</span></a>
 	<ul>
 		<li>
@@ -24,7 +27,7 @@
 		{% if current_user.is_authenticated %}
 			<li class="login"><a href="/user/{{ current_user.username }}">{{ current_user.username }}</a></li>
 		{% else %}
-			<li class="login"><a href="/auth/login">登录</a></li>
+			<li class="login"><a class="login" href="/auth/login">登录</a></li>
 		{% endif %}
 	</ul>
 </nav>

@@ -16,11 +16,10 @@
 				{{ form.search(placeholder="搜索") }}
 			</form>
 		</li>
-		<li><a href="/write">发布文章</a></li>
 		{% if current_user.is_authenticated %}
 			<li><a href="/user/{{ current_user.username }}">{{ current_user.username }}</a></li>
 		{% else %}
-			<li><a href="/auth/login">登录</a></li>
+			<li><a class="login" href="/auth/login">登录</a></li>
 		{% endif %}
 	</ul>
 </nav>
