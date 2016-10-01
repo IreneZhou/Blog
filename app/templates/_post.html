@@ -24,14 +24,21 @@
 				{% if post.category_id %}
 					<li>
 						<i class="material-icons">location_on</i>
-						<span id="category">{{ post.category.name }}</span>
+						<a href="{{ url_for('main.category', id=post.category.id) }}"><span id="category">{{ post.category.name }}</span></a>
 					</li>
 				{% endif %}
 
 				{% if post.domain_id %}
 					<li>
 						 <i class="material-icons">label</i>
-						 <span>{{ post.domain.name}}</span>
+						 <a href="{{ url_for('main.domain', id=post.domain.id) }}"><span>{{ post.domain.name}}</span></a>
+					</li>
+				{% endif %}
+
+				{% if post.topic_id %}
+					<li>
+						 <i class="material-icons">book</i>
+						 <a href="{{ url_for('main.topic', id=post.topic.id) }}"><span>{{ post.topic.name}}</span></a>
 					</li>
 				{% endif %}
 

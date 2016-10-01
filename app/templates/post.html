@@ -30,8 +30,13 @@
 	<article>
 			<div class="post-title">{{ post.title }}</div>
 			<div class="post-author">
-				文 / <a class="author-name" href="{{ url_for('.user', username=post.author.username) }}">{{ post.author.username }}</a>
-				<div class="post-date">发表 / {{ moment(post.timestamp).format("YYYY-MM-D") }}</div>
+				{% if post.author.photo %}
+					<img class="gravatar" src="../{{ post.author.photo }}">
+				{% else %}
+					<img class="gravatar" src="{{ post.author.gravatar(size=16) }}">
+				{% endif %}
+				<a class="author-name" href="{{ url_for('.user', username=post.author.username) }}">{{ post.author.username }}</a>
+				<div class="post-date">{{ moment(post.timestamp).format("YYYY-MM-D") }}</div>
 			</div>
 
 			<div class="post-body">
@@ -126,6 +131,16 @@
 				{% endfor %}
 			</ul></div>
 			{% endif %}
+
+			<div class="next">
+				{% if previous %}
+					<a id="previous" href="/post/{{ previous.id }}">上一篇</a>
+				{% endif %}
+
+				{% if next %}
+					<a id="next" href="/post/{{ next.id }}">下一篇</a>
+				{% endif %}
+			</div>
 
 		</article>
 

@@ -55,6 +55,14 @@ div.post {
 	font-size: 12px;
 }
 
+.metas > li a {
+	color: #777;
+}
+
+.metas > li a:hover {
+	opacity: 0.5;
+}
+
 .metas span {
 	vertical-align: middle;
 }
@@ -88,4 +96,13 @@ img {
 .metas .material-icons {
 	color: #C8C8C8;
 	vertical-align: middle;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 1024px) {
+	.metas > li {
+		margin-right: 10px;
+	}
 }

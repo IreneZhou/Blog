@@ -6,7 +6,24 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search_results.css') }}">
 {% endblock %}
 {% block body %}
-	{% include '_nav.html' %}
+	<nav id="nav">
+	<a href="/index"><span id="index">地球观察团</span></a>
+	<ul>
+		<li>
+			<form action="{{ url_for('main.search') }}" method="post" name="search" class="search">
+				{{ form.hidden_tag() }}
+				{{ form.search(placeholder="搜索") }}
+			</form>
+		</li>
+		{% if current_user.is_authenticated %}
+			<li class="login"><a href="/user/{{ current_user.username }}">{{ current_user.username }}</a></li>
+		{% else %}
+			<li class="login"><a class="login" href="/auth/login">登录</a></li>
+		{% endif %}
+	</ul>
+	</nav>
+
+
 	<div id="container">
 		<div id="search-result">"{{ query }}" 搜索结果:</div>
 			{% for post in results %}

@@ -151,7 +151,6 @@ def write():
 				if form.domain.data:
 					post.domain = Domain.query.get(form.domain.data)
 
-
 				db.session.add(post)
 
 				try:
@@ -173,7 +172,6 @@ def edit(id):
 	if current_user != post.author and not current_user.can(Permission.ADMINISTER):
 		abort(403)
 	form = PostForm()
-
 
 	if form.validate_on_submit():
 
@@ -204,13 +202,15 @@ def edit(id):
 	form.long.data = post.long
 	form.domain.data = post.domain
 	form.category.data = post.category
-	form.topic = post.topic
+	form.topic.data = post.topic
 	return render_template('write.html', form=form, all_posts=all_posts)
 
 
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
 	post = Post.query.get_or_404(id)
+	next = Post.query.get(id+1)
+	previous = Post.query.get(id-1)
 	commentForm = CommentForm()
 	if commentForm.validate_on_submit() and current_user.is_authenticated:
 		comment = Comment(body=commentForm.body.data,
@@ -219,15 +219,9 @@ def post(id):
 		db.session.add(comment)
 		flash('Your comment has been published.')
 		return redirect(url_for('.post', id=post.id, page=-1))
-	# page = request.args.get('page', 1, type=int)
-	# if page == -1:
-	# 	page = (post.comments.count() - 1) / current_app.config['COMMENTS_PER_PAGE'] + 1
-	# pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(page, per_page=current_app.config[
-	# 'COMMENTS_PER_PAGE'], error_out=False)
-	#
-	# comments = pagination.items
 	comments = post.comments.order_by(Comment.timestamp.asc())
-	return render_template('post.html', post=post, commentForm=commentForm, form=SearchForm(), comments=comments)
+	return render_template('post.html', post=post, commentForm=commentForm, form=SearchForm(), comments=comments,
+						   next=next, previous=previous)
 
 
 #收藏

@@ -20,11 +20,14 @@ img {
 	height: 500px;
 }
 
+a {
+	text-decoration: none;
+}
+
 nav a {
 	color: white;
 	font-size: 16px;
 	font-weight: lighter;
-	text-decoration: none;
 	line-height: 50px;
 }
 
@@ -40,7 +43,7 @@ nav h2 {
 
 #description {
 	display: block;
-	width: 400px;
+	max-width: 400px;
 	margin: auto;
 	padding-top: 80px;
 }
@@ -196,14 +199,14 @@ div.post:nth-child(odd) {
     float: right;
 }
 
+.material-icons {
+	font-size: 18px;
+}
+
 @media (max-width: 700px) {
 	.wrapper {
 		width: 100%;
 	}
-}
-
-.material-icons {
-	font-size: 18px;
 }
 
 /* ------------- responsive design ------------------ */
@@ -216,6 +219,9 @@ and (max-device-width : 1024px) {
 	}
 	.metas {
 		margin-top: 0;
+	}
+	.metas > li {
+		margin-right: 10px;
 	}
 	.metas, a.post-title {
 		font-size: 11px;
@@ -236,6 +242,20 @@ and (max-device-width : 1024px) {
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
+	.metas > li {
+		margin-right: 10px;
+	}
+	nav h2 {
+		font-size: 16px;
+		margin-left: 20px;
+	}
+	#logout {
+		font-size: 16px;
+		margin-right: 20px;
+	}
+	#description > span {
+    	font-size: 14px;
+	}
 	#profile {
 		height: 300px;
 	}
@@ -246,14 +266,26 @@ and (max-device-width : 480px) {
 	#description {
 		padding-top: 20px;
 	}
+	#description span {
+		padding-top: 10px;
+	}
 	.post-content {
-		padding: 8px;
+		padding: 5px;
 	}
 	.post-title, .metas {
-		font-size: 11px;
+		font-size: 10px;
 	}
 	.metas {
 		margin: 0;
+	}
+	.metas > li {
+		font-size: 10px;
+	}
+	.metas span {
+		font-size: 11px;
+	}
+	a.post-title {
+		font-size: 12px;
 	}
 	img.gravatar {
 		width: 11px;

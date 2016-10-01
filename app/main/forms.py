@@ -33,9 +33,9 @@ class PostForm(Form):
 
 
 class EditProfileForm(Form):
-	name = StringField('真实姓名', validators=[Length(0, 64)])
+	name = StringField('真实姓名', validators=[Length(0, 12)])
 	location = StringField('所在地', validators=[Length(0, 64)])
-	about_me = TextAreaField("自我介绍")
+	about_me = TextAreaField("自我介绍", validators=[Length(0, 100)])
 	submit = SubmitField("确认")
 	photo = TextAreaField()
 

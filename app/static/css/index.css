@@ -18,6 +18,9 @@ a:hover {
     text-decoration: none;
 }
 
+li {
+	list-style: none;
+}
 
 body {
 	background: white;
@@ -53,8 +56,8 @@ div.pagination {
 
 
 .pop-img {
-    width: 280px;
-    height: 160px;
+    width: 240px;
+    height: 140px;
 	margin-top: 5px;
 }
 
@@ -63,7 +66,7 @@ a.popup-title {
 	display: block;
 	text-align: center;
 	color: black;
-	font-size: 13px;
+	font-size: 14px;
 	text-decoration: none;
 	font-weight: 200;
 }
@@ -127,7 +130,7 @@ input#search {
 .side-nav {
     padding-top: 40px;
     position: fixed;
-    width: 300px;
+    width: 250px;
     left: 0;
     top: 0;
     margin: 0;
@@ -137,7 +140,7 @@ input#search {
     height: calc(100% + 60px);
     height: -moz-calc(100%);
     padding-bottom: 60px;
-    background-color: #fff;
+    background-color: #66656A;
     z-index: 999;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -166,13 +169,15 @@ ul.side-nav > li > a {
 	font-size: 14px;
 }
 
-.collapsible-body >a {
+.collapsible-body > a {
+	color: #fff;
 	display: block;
 	font-weight: 200;
 	padding-left: 60px;
 }
 
 .collapsible-header {
+	color: #fff;
 	font-size: 16px;
 	padding-left: 40px;
 	height: 50px;
@@ -180,11 +185,11 @@ ul.side-nav > li > a {
 }
 
 .collapsible-header:hover {
-	background-color: #F3F3F3;
+	background-color: #7CC2FE;
 }
 
 .collapsible-body > a:hover {
-	background-color: #F3F3F3;
+	background-color: #7CC2FE;
 }
 
 
@@ -202,19 +207,25 @@ ul.side-nav > li > a {
 a.button {
 	text-align: center;
 	display: block;
-	width: 80%;
-	height: 50px;
-	background-color: black;
-	position: absolute;
+	width: 70%;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid white;
+	margin: auto;
 	bottom: 150px;
 	left: 10%;
-	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+a.homepage {
+	display: none;
 }
 
 .white {
 	color: white;
+}
+
+.leaflet-popup-content {
+	width: 260px;
 }
 
 
@@ -238,6 +249,9 @@ and (max-device-width : 1024px) {
 	.post-content {
 		padding: 8px;
 	}
+	.post-body img {
+    	width: 100%;
+	}
 	.metas {
 		margin-top: 0!important;
 	}
@@ -258,6 +272,13 @@ and (max-device-width : 1024px) {
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
+	a.homepage {
+		display: inherit;
+		margin-bottom: 20px;
+	}
+	.side-nav {
+		width: 200px;
+	}
 	.wrapper {
 		margin-bottom: 15px;
 	}
@@ -287,14 +308,17 @@ and (max-device-width : 480px) {
 	.post-content {
 		padding: 5px;
 	}
+	.post-body img {
+    	width: 100%;
+	}
 	.metas {
 		margin: 0;
 	}
 	span#index {
 		letter-spacing: 0;
 	}
-	.login {
-		display: none;
+	.login > a {
+    	display: none;
 	}
 	#nav {
 		padding: 0!important;

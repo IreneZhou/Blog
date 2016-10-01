@@ -6,6 +6,11 @@
 	box-sizing: border-box;
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+
 body {
 	background: white;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -42,6 +47,12 @@ article {
 	margin-bottom: 20px;
 }
 
+.post-author .gravatar {
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+}
+
 .author-name {
 	color: black;
 	margin-right: 20px;
@@ -57,6 +68,10 @@ article {
 	width: 1024px;
 	margin: auto;
 	font-weight: 200;
+}
+
+.post-body img {
+    max-width: 100%;
 }
 
 form.comment-form {
@@ -165,7 +180,7 @@ p>a {
 	color: #7194C2;;
 }
 
-img.gravatar {
+.comment .gravatar {
 	height: 30px;
 	width: 30px;
 	border-radius: 50%;
@@ -229,23 +244,42 @@ input#search {
     height: 28px;
 }
 
-a {
+a:hover {
 	text-decoration: none;
 }
 
-a:hover {
-	text-decoration: none;
+.next {
+	width: 1024px;
+	height: 40px;
+	margin: auto;
+}
+
+#previous, #next {
+    text-align: center;
+    line-height: 40px;
+    height: 100%;
+    width: 48%;
+    border: 1px solid black;
+    display: inline-block;
+	font-size: 16px;
+}
+
+#next {
+	float: right;
 }
 
 
 /* responsive design */
 @media only screen
 and (max-device-width : 1024px) {
+	.next {
+		width: 90%;
+	}
 	.post-body {
 		font-size: 11px;
 	}
 	.post-body, .response, form.comment-form {
-		width: auto;
+		width: 100%;
 	}
 	.post-title {
 		font-size: 20px;
