@@ -240,3 +240,12 @@ label#upload {
     /*height: 60px;*/
     /*line-height: 16px;*/
 /*}*/
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+	#description {
+		width: 80%;
+	}
+}
