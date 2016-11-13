@@ -1,8 +1,8 @@
 #Readme.md
 
-运行：
+#### Run：
 
-````
+````bash
 $ git clone https://github.com/IreneZhou/Blog.git
 $ cd Blog
 $ virtualenv venv
@@ -11,14 +11,27 @@ $ pip install -r requirements.txt
 $ python manage.py runserver
 ````
 
-Use python3
 
-预览：  ![Screen Shot 2016-10-01 at 9.42.45 PM](preview/Screen Shot 2016-10-01 at 9.42.45 PM.jpg)
 
- ![Screen Shot 2016-10-01 at 9.50.14 PM](preview/Screen Shot 2016-10-01 at 9.50.14 PM.jpg)
+#### Backend:
 
- ![Screen Shot 2016-10-01 at 9.55.24 PM](preview/Screen Shot 2016-10-01 at 9.55.24 PM.jpg)
+-   Framework: Python Flask
+-   Database: [SQLAlchemy](http://www.sqlalchemy.org/)
+-   Python version: 3.4
 
- ![Screen Shot 2016-10-01 at 10.05.54 PM](preview/Screen Shot 2016-10-01 at 10.05.54 PM.jpg)
+#### Frontend:
 
- ![Screen Shot 2016-10-01 at 10.31.12 PM](preview/Screen Shot 2016-10-01 at 10.31.12 PM.jpg)
+-   HTML/CSS/jQuery
+-   Bootstrap
+-   [Material icons - Google Design](https://material.io/icons/)
+-   [materializecss](materializecss.com)
+
+**Responsive Design**
+
+
+
+#### Preview：  ![](preview/index.jpg)
+
+![mobile](preview/mobile.jpeg) ![ipad](preview/ipad.jpeg)
+
+ ![write](preview/write.jpeg)
