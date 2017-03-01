@@ -28,7 +28,7 @@ def test():
 	unittest.TextTestRunner(verbosity=2).run(tests)
 
 
-# #测试数据库初始化
+
 # @manager.command
 # def datainit():
 # 	from app.models import Role, Category, Domain

@@ -8,7 +8,7 @@ $ cd Blog
 $ virtualenv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
-$ python manage.py runserver
+$ python3 manage.py runserver
 ````
 
 
@@ -26,7 +26,9 @@ $ python manage.py runserver
 -   [Material icons - Google Design](https://material.io/icons/)
 -   [materializecss](materializecss.com)
 
-**Responsive Design**
+#### Plugins:
+-   [Leaflet](http://leafletjs.com/)  v1.0.3
+-   [TinyMCE](https://www.tinymce.com/)  v4.5.4
 
 
 
